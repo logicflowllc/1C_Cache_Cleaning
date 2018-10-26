@@ -12,7 +12,9 @@ namespace _1C_Cache_Cleaning
     public partial class MainWindow : Window
     {
         // Counter of errors
-        static int errorsCount = 0;
+        private static int errorsCount = 0;
+        // Counter of cache size
+        private static double cacheSize = 0L;
 
         public MainWindow()
         {
@@ -21,10 +23,10 @@ namespace _1C_Cache_Cleaning
 
         public object MessageBoxIcon { get; private set; }
 
-        // Find 2 folders "1C" in Application Data in Local and Roaming
-        //
         private void CacheCleaningButton_Click(object sender, RoutedEventArgs e)
         {
+            cacheSize = 0;
+
             string AppDataLocalGlobal = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string AppDataRoamingGlobal = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
@@ -66,7 +68,12 @@ namespace _1C_Cache_Cleaning
 
             if (statusLocal == 0 && statusRoaming == 0)
             {
-                MessageBox.Show("Очистка кэша 1С успешно завершена", "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Очистка кэша 1С успешно завершена.\n\n");
+                sb.Append("Очищено ");
+                sb.Append(ConvertCacheSize());
+
+                MessageBox.Show(sb.ToString(), "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -84,6 +91,14 @@ namespace _1C_Cache_Cleaning
                 {
                     try
                     {
+                        string[] allFiles = Directory.GetFiles(CachePath, "*.*", SearchOption.AllDirectories);
+
+                        foreach (string fileName in allFiles)
+                        {
+                            FileInfo info = new FileInfo(fileName);
+                            cacheSize += info.Length;
+                        }
+                            
                         Directory.Delete(CachePath, true);
                     }
                     catch
@@ -95,12 +110,42 @@ namespace _1C_Cache_Cleaning
                         // Returned status 1
                         status = 1;
 
+                        cacheSize = 0;
+
                         // Break
                         return;
                     }
                 }
             }
             status = 0;
+        }
+
+        // Convert cache size 
+        private string ConvertCacheSize()
+        {
+            if ((cacheSize > (1024 * 1024 * 1024 )))
+                {
+                double temp = Convert.ToDouble(cacheSize) / (1024 * 1024 * 1024);
+                return temp.ToString("0.00") + " GB";
+            }
+            else if ((cacheSize < (1024 * 1024 * 1024)) && (cacheSize > (1024 * 1024)))
+            {
+                double temp = Convert.ToDouble(cacheSize) / (1024 * 1024);
+                return temp.ToString("0.00") + " MB";
+            }
+            else if (cacheSize < 1024 * 1024 && cacheSize > 1024)
+            {
+                double temp = Convert.ToDouble(cacheSize) / (1024);
+                return temp.ToString("0.00") + " KB";
+            }
+            else if (cacheSize < 1024 && cacheSize > 0)
+            {
+                return cacheSize.ToString() + " B";
+            }
+            else
+            {
+                return "0 B";
+            }
         }
 
         // Open Logic Flow web site
