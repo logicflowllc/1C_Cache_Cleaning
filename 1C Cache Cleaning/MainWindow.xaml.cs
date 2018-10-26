@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -100,6 +101,18 @@ namespace _1C_Cache_Cleaning
                 }
             }
             status = 0;
+        }
+
+        // Open Logic Flow web site
+        private void LabelLF_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("http://logicflow.ru");
+        }
+
+        // Open GitHub web site
+        private void Label_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/dtinside/1C_Cache_Cleaning");
         }
     }
 }

@@ -10,16 +10,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="CacheCleaningButton" Content="Очистить кэш" HorizontalAlignment="Left" Margin="93.2,140.559,0,21.165" VerticalAlignment="Center" Width="159.055" Height="31.276" VerticalContentAlignment="Center" Click="CacheCleaningButton_Click" TabIndex="1" IsDefault="True" Background="#FFC7FFA7" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="CacheCleaningButton" Content="Очистить кэш" HorizontalAlignment="Left" Margin="93.2,136.059,0,25.665" VerticalAlignment="Center" Width="159.055" Height="31.276" VerticalContentAlignment="Center" Click="CacheCleaningButton_Click" TabIndex="1" IsDefault="True" Background="#FFC7FFA7" FontSize="14" FontWeight="Bold"/>
         <Label Content="Утилита выполняет удаление кэша 1С:Предприятия из" HorizontalAlignment="Center" Margin="22.727,10,21.272,0" VerticalAlignment="Top" Padding="0" Width="300.001" VerticalContentAlignment="Center"/>
-        <Label Content="• 1cv8" HorizontalAlignment="Left" Margin="110.005,55.303,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
-        <Label Content="• 1Cv82t" HorizontalAlignment="Left" Margin="174.338,71.303,0,0" VerticalAlignment="Top" Padding="0" Width="60"/>
-        <Label Content="• 1cv8t" HorizontalAlignment="Left" Margin="110.005,71.303,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
-        <Label Content="• 1Cv82" HorizontalAlignment="Left" Margin="174.338,55.303,0,0" VerticalAlignment="Top" Padding="0" Width="60"/>
-        <Label Content="• 1Cv83" HorizontalAlignment="Left" Margin="110.005,87.303,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
-        <Label Content="Завершите все сеансы 1С до начала чистки!" HorizontalAlignment="Left" Margin="35.561,119.559,0,0" VerticalAlignment="Top" Padding="0" Width="274.333" Foreground="Red" FontWeight="Bold"/>
-        <Label Content="директорий Local и Roaming:" HorizontalAlignment="Left" Margin="91.727,26,0,0" VerticalAlignment="Top" Padding="0" Width="162"/>
-        <Label Content="LogicFlow LLC. © 2018" HorizontalAlignment="Left" Margin="5.061,178.827,0,0" VerticalAlignment="Top" Padding="0" Width="83.334" FontSize="8"/>
+        <Label Content="• 1cv8" HorizontalAlignment="Left" Margin="110.005,53.803,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
+        <Label Content="• 1Cv82t" HorizontalAlignment="Left" Margin="174.338,69.803,0,0" VerticalAlignment="Top" Padding="0" Width="60"/>
+        <Label Content="• 1cv8t" HorizontalAlignment="Left" Margin="110.005,69.803,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
+        <Label Content="• 1Cv82" HorizontalAlignment="Left" Margin="174.338,53.803,0,0" VerticalAlignment="Top" Padding="0" Width="60"/>
+        <Label Content="• 1Cv83" HorizontalAlignment="Left" Margin="110.005,85.803,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
+        <Label Content="Завершите все сеансы 1С до начала чистки!" HorizontalAlignment="Left" Margin="42.811,115.059,0,0" VerticalAlignment="Top" Padding="0" Width="259.833" Foreground="Red" FontWeight="Bold"/>
+        <Label Content="директорий Local и Roaming:" HorizontalAlignment="Left" Margin="91.727,26,0,0" VerticalAlignment="Top" Padding="0" Width="162.001"/>
+        <Label Content="LogicFlow LLC." HorizontalAlignment="Left" Margin="10,178.827,0,0" VerticalAlignment="Top" Padding="0" Width="53.834" FontSize="8" Foreground="#FF0046FF" MouseLeftButtonUp="LabelLF_MouseLeftButtonUp"/>
+        <Label Content="GitHub" HorizontalAlignment="Left" Margin="308.499,178.827,0,0" VerticalAlignment="Top" Padding="0" Width="25.501" FontSize="8" Foreground="#FF0046FF" MouseLeftButtonUp="Label_MouseLeftButtonUp"/>
 
     </Grid>
 </Window>
