@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace _1C_Cache_Cleaning
 {
@@ -15,6 +16,8 @@ namespace _1C_Cache_Cleaning
         private static int errorsCount = 0;
         // Counter of cache size
         private static double cacheSize = 0L;
+        // Mouse hover counter
+        private static int mouseCount = 0;
 
         public MainWindow()
         {
@@ -23,7 +26,8 @@ namespace _1C_Cache_Cleaning
 
         public object MessageBoxIcon { get; private set; }
 
-        private void CacheCleaningButton_Click(object sender, RoutedEventArgs e)
+        // Start button handler
+        private void CacheCleaningButton_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             cacheSize = 0;
 
@@ -37,7 +41,6 @@ namespace _1C_Cache_Cleaning
                 @"\1C\1Cv82t\",
                 @"\1C\1Cv83\"
             };
-
 
             // Status of cleaning
             int statusLocal = 0;
@@ -77,7 +80,7 @@ namespace _1C_Cache_Cleaning
             }
         }
 
-        // Cleaning 
+        // Cleaning of cache
         private void Cleaning(string[] TargetPaths, out int status)
         {
             // Foreach all subfolders
@@ -155,9 +158,25 @@ namespace _1C_Cache_Cleaning
         }
 
         // Open GitHub web site
-        private void Label_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Label_GitHub_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("https://github.com/dtinside/1C_Cache_Cleaning");
+        }
+
+        // Start button hover action
+        private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (mouseCount == 0) {
+                startButton.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Hover.bmp", UriKind.Relative));
+                mouseCount += 1;
+            }
+        }
+
+        // Start button leave action
+        private void startButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            startButton.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Normal.bmp", UriKind.Relative));
+            mouseCount = 0;
         }
     }
 }

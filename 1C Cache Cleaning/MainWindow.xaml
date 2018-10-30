@@ -5,22 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_1C_Cache_Cleaning"
         mc:Ignorable="d"
-        Title="Logic Flow // Чистка кэша 1С:Предприятие" Height="222" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="1CCC.ico">
-    <Grid>
+        Title="Logic Flow // Чистка кэша 1С:Предприятие" Height="250" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico">
+    <Grid Background="#FF212121">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="CacheCleaningButton" Content="Очистить кэш" HorizontalAlignment="Left" Margin="93.2,136.059,0,25.665" VerticalAlignment="Center" Width="159.055" Height="31.276" VerticalContentAlignment="Center" Click="CacheCleaningButton_Click" TabIndex="1" IsDefault="True" Background="#FFC7FFA7" FontSize="14" FontWeight="Bold"/>
-        <Label Content="Утилита выполняет удаление кэша 1С:Предприятия из" HorizontalAlignment="Center" Margin="22.727,10,21.272,0" VerticalAlignment="Top" Padding="0" Width="300.001" VerticalContentAlignment="Center"/>
-        <Label Content="• 1cv8" HorizontalAlignment="Left" Margin="110.005,53.803,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
-        <Label Content="• 1Cv82t" HorizontalAlignment="Left" Margin="174.338,69.803,0,0" VerticalAlignment="Top" Padding="0" Width="60"/>
-        <Label Content="• 1cv8t" HorizontalAlignment="Left" Margin="110.005,69.803,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
-        <Label Content="• 1Cv82" HorizontalAlignment="Left" Margin="174.338,53.803,0,0" VerticalAlignment="Top" Padding="0" Width="60"/>
-        <Label Content="• 1Cv83" HorizontalAlignment="Left" Margin="110.005,85.803,0,0" VerticalAlignment="Top" Padding="0" Width="59.333"/>
-        <Label Content="Завершите все сеансы 1С до начала чистки!" HorizontalAlignment="Left" Margin="42.811,115.059,0,0" VerticalAlignment="Top" Padding="0" Width="259.833" Foreground="Red" FontWeight="Bold"/>
-        <Label Content="директорий Local и Roaming:" HorizontalAlignment="Left" Margin="91.727,26,0,0" VerticalAlignment="Top" Padding="0" Width="162.001"/>
-        <Label Content="LogicFlow LLC." HorizontalAlignment="Left" Margin="10,178.827,0,0" VerticalAlignment="Top" Padding="0" Width="53.834" FontSize="8" Foreground="#FF0046FF" MouseLeftButtonUp="LabelLF_MouseLeftButtonUp"/>
-        <Label Content="GitHub" HorizontalAlignment="Left" Margin="308.499,178.827,0,0" VerticalAlignment="Top" Padding="0" Width="25.501" FontSize="8" Foreground="#FF0046FF" MouseLeftButtonUp="Label_MouseLeftButtonUp"/>
+        <Label x:Name="Label_Syn1" Content="Утилита выполняет удаление кэша 1С:Предприятия из" HorizontalAlignment="Center" Margin="22,10,22,0" VerticalAlignment="Top" Padding="0" Width="300" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="Gainsboro" Height="16.5"/>
+        <Label x:Name="Label_Syn4" Content="Завершите все сеансы 1С до начала чистки!" HorizontalAlignment="Center" Margin="42.083,68.5,42.083,0" VerticalAlignment="Top" Padding="0" Width="259.834" Foreground="#FFFF3838" FontWeight="Bold" Background="{x:Null}"/>
+        <Label x:Name="Label_Syn2" Content="директорий Local и Roaming: 1cv8, 1cv8t, 1cv82," HorizontalAlignment="Center" Margin="22,26,22,0" VerticalAlignment="Top" Padding="0" Background="{x:Null}" Foreground="Gainsboro" Width="300" HorizontalContentAlignment="Center" Height="16.5"/>
+        <Label x:Name="Label_LF" Content="LogicFlow LLC." HorizontalAlignment="Left" Margin="275.166,203.138,0,0" VerticalAlignment="Top" Padding="0" Width="58.834" FontSize="9" Foreground="#FF789DFF" MouseLeftButtonUp="LabelLF_MouseLeftButtonUp" Background="{x:Null}"/>
+        <Label x:Name="Label_GitHub" Content="GitHub" HorizontalAlignment="Left" Margin="303.999,191.138,0,0" VerticalAlignment="Top" Padding="0" Width="30.001" FontSize="9" Foreground="#FF789DFF" MouseLeftButtonUp="Label_GitHub_MouseLeftButtonUp" Background="{x:Null}"/>
+        <Image x:Name="startButton" HorizontalAlignment="Center" Height="99.668" Margin="122,100.666,122,20.666" VerticalAlignment="Center" Width="100" Source="Images/1CCC_Start_Normal.bmp" MouseDown="CacheCleaningButton_Click" MouseEnter="Image_MouseEnter" MouseLeave="startButton_MouseLeave" Stretch="None"/>
+        <Label x:Name="Label_Syn3" Content="1cv82t, 1cv83.&#xA;" HorizontalAlignment="Center" Margin="22,42,22,0" VerticalAlignment="Top" Padding="0" Background="{x:Null}" Foreground="Gainsboro" Width="300" HorizontalContentAlignment="Center" Height="16.5"/>
+        <Label x:Name="Label_Version" Content="0.1.3010.0645" HorizontalAlignment="Left" Margin="10,203.138,0,0" VerticalAlignment="Top" Padding="0" Width="56.501" FontSize="9" Foreground="#FF494949" Background="{x:Null}"/>
 
     </Grid>
 </Window>
