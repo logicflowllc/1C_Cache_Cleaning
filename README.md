@@ -15,3 +15,5 @@ Clear all 1C:Enterprise cache from *Application Data* folder for current user
 * Application Data\Roaming\1C\1Cv82
 * Application Data\Roaming\1C\1Cv82t
 * Application Data\Roaming\1C\1Cv83
+
+Требуется установленный .NET Framework 4. Никакие его возможности не используются, но в последних версиях ОС Windows его предшественники не установлены "из коробки".
