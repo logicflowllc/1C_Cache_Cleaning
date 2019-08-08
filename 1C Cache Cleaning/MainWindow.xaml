@@ -5,19 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_1C_Cache_Cleaning"
         mc:Ignorable="d"
-        Title="Logic Flow // Чистка кэша 1С:Предприятие" Height="250" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico">
+        Title="Чистка кэша 1С:Предприятие // Logic Flow" Height="250" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico">
     <Grid Background="#FF212121">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="Label_Syn1" Content="Утилита выполняет удаление кэша 1С:Предприятия из" HorizontalAlignment="Center" Margin="22,10,22,0" VerticalAlignment="Top" Padding="0" Width="300" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="Gainsboro" Height="16.5"/>
-        <Label x:Name="Label_Syn4" Content="Завершите все сеансы 1С до начала чистки!" HorizontalAlignment="Center" Margin="42.083,68.5,42.083,0" VerticalAlignment="Top" Padding="0" Width="259.834" Foreground="#FFFF3838" FontWeight="Bold" Background="{x:Null}"/>
-        <Label x:Name="Label_Syn2" Content="директорий Local и Roaming: 1cv8, 1cv8t, 1cv82," HorizontalAlignment="Center" Margin="22,26,22,0" VerticalAlignment="Top" Padding="0" Background="{x:Null}" Foreground="Gainsboro" Width="300" HorizontalContentAlignment="Center" Height="16.5"/>
-        <Label x:Name="Label_LF" Content="LogicFlow LLC." HorizontalAlignment="Left" Margin="275.166,203.138,0,0" VerticalAlignment="Top" Padding="0" Width="58.834" FontSize="9" Foreground="#FF789DFF" MouseLeftButtonUp="LabelLF_MouseLeftButtonUp" Background="{x:Null}"/>
-        <Label x:Name="Label_GitHub" Content="GitHub" HorizontalAlignment="Left" Margin="303.999,191.138,0,0" VerticalAlignment="Top" Padding="0" Width="30.001" FontSize="9" Foreground="#FF789DFF" MouseLeftButtonUp="Label_GitHub_MouseLeftButtonUp" Background="{x:Null}"/>
-        <Image x:Name="startButton" HorizontalAlignment="Center" Height="99.668" Margin="122,100.666,122,20.666" VerticalAlignment="Center" Width="100" Source="Images/1CCC_Start_Normal.bmp" MouseDown="CacheCleaningButton_Click" MouseEnter="Image_MouseEnter" MouseLeave="startButton_MouseLeave" Stretch="None"/>
-        <Label x:Name="Label_Syn3" Content="1cv82t, 1cv83.&#xA;" HorizontalAlignment="Center" Margin="22,42,22,0" VerticalAlignment="Top" Padding="0" Background="{x:Null}" Foreground="Gainsboro" Width="300" HorizontalContentAlignment="Center" Height="16.5"/>
-        <Label x:Name="Label_Version" Content="0.2.0808.2250" HorizontalAlignment="Left" Margin="10,203.138,0,0" VerticalAlignment="Top" Padding="0" Width="56.501" FontSize="9" Foreground="#FF494949" Background="{x:Null}"/>
+
+        <Image HorizontalAlignment="Left" Height="765" Margin="-149,-92,-328,-452" VerticalAlignment="Top" Width="821" Source="Images/LF_Logo_Small_Edges_1000x1000.png" Opacity="0.2"/>
+
+        <Label x:Name="Label_Syn1" Content="Утилита выполняет удаление кэша 1С:Предприятия" HorizontalAlignment="Center" Margin="13,10,13,0" VerticalAlignment="Top" Padding="0" Width="318" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="Gainsboro" Height="16" HorizontalContentAlignment="Center"/>
+        <Label x:Name="Label_Syn4" Content="Завершите все сеансы 1С до начала чистки!" HorizontalAlignment="Center" Margin="32,51,32,0" VerticalAlignment="Top" Padding="0" Width="280" Foreground="#FFFFBEBE" Background="{x:Null}" HorizontalContentAlignment="Center"/>
+        <Label x:Name="Label_Syn2" Content="из директорий Local и Roaming." HorizontalAlignment="Center" Margin="22,26,22,0" VerticalAlignment="Top" Padding="0" Background="{x:Null}" Foreground="Gainsboro" Width="300" HorizontalContentAlignment="Center" Height="16"/>
+        <Label x:Name="Label_LF" Content="LogicFlow LLC." HorizontalAlignment="Left" Margin="260,202,0,0" VerticalAlignment="Top" Padding="0" Width="77" FontSize="10" Foreground="#FF789DFF" MouseLeftButtonUp="LabelLF_MouseLeftButtonUp" Background="{x:Null}" HorizontalContentAlignment="Right"/>
+        <Label x:Name="Label_GitHub" Content="GitHub" HorizontalAlignment="Left" Margin="9,202,0,0" VerticalAlignment="Top" Padding="0" Width="35" FontSize="10" Foreground="#FF789DFF" MouseLeftButtonUp="Label_GitHub_MouseLeftButtonUp" Background="{x:Null}"/>
+        <Image x:Name="startButton" HorizontalAlignment="Center" Height="99" Margin="122,83,122,39" VerticalAlignment="Center" Width="100" Source="Images/1CCC_Start_Normal.bmp" MouseDown="CacheCleaningButton_Click" MouseEnter="Image_MouseEnter" MouseLeave="startButton_MouseLeave" Stretch="None">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+        </Image>
+        <Label x:Name="Label_Version" Content="0.2.0808.2359" HorizontalAlignment="Left" Margin="9,189,0,0" VerticalAlignment="Top" Padding="0" Width="73" FontSize="10" Foreground="#FF494949" Background="{x:Null}"/>
 
     </Grid>
 </Window>

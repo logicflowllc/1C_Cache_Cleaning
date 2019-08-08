@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,9 +25,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2250</ApplicationRevision>
+    <ApplicationRevision>2359</ApplicationRevision>
     <ApplicationVersion>0.2.0808.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -123,6 +123,9 @@
   <ItemGroup>
     <Resource Include="Images\1CCC_Start_Hover.bmp" />
     <Resource Include="Images\1CCC_Start_Normal.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LF_Logo_Small_Edges_1000x1000.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
