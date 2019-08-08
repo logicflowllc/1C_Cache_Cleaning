@@ -106,18 +106,18 @@ namespace _1C_Cache_Cleaning
                     }
                     catch
                     {
-                        MessageBox.Show("Закройте все окна программы 1С:Предприятие и запустите очистку снова", "Не удаётся удалить кэш", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\nНе весь кэш будет очищен.\nПопробуйте повторить чистку после перезагрузки ПК", "Не весь кэш будт очищен", MessageBoxButton.OK, MessageBoxImage.Warning);
                         // Errors count increment
                         errorsCount += 1;
 
                         // Returned status 1
-                        status = 1;
+                        status = 0;
 
                         cacheSize = 0;
 
                         // Break
                         return;
-                    }
+                    }                    
                 }
             }
             status = 0;
@@ -154,7 +154,7 @@ namespace _1C_Cache_Cleaning
         // Open Logic Flow web site
         private void LabelLF_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Process.Start("http://logicflow.ru");
+            Process.Start("https://logicflow.ru");
         }
 
         // Open GitHub web site
