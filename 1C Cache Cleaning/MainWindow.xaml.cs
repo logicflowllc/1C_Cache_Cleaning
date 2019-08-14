@@ -29,6 +29,44 @@ namespace _1C_Cache_Cleaning
         // Start button handler
         private void CacheCleaningButton_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // Calling for cleaning
+            StartCleaning();
+        }
+
+        // Start button handler with killing 1C processes
+        private void CacheCleaningButtonAggressive_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                // Kill all processes
+                foreach (Process process in Process.GetProcessesByName("1cv8"))
+                {
+                    process.Kill();
+                }
+                foreach (Process process in Process.GetProcessesByName("1cv8c"))
+                {
+                    process.Kill();
+                }
+                // Calling for cleaning
+                Process[] proc1cv8 = Process.GetProcessesByName("1cv8");
+                if (proc1cv8.Length == 0)
+                {
+                    StartCleaning();
+                }
+                Process[] proc1cv8c = Process.GetProcessesByName("1cv8c");
+                if (proc1cv8c.Length == 0)
+                {
+                    StartCleaning();
+                }
+            }
+            catch {
+                MessageBox.Show("Error");
+            }
+        }
+
+        // Cleaning 
+        private void StartCleaning()
+        {
             cacheSize = 0;
 
             string AppDataLocalGlobal = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -72,7 +110,7 @@ namespace _1C_Cache_Cleaning
             if (statusLocal == 0 && statusRoaming == 0)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("Очистка кэша 1С успешно завершена.\n\n");
+                sb.Append("Очистка кэша 1С завершена.\n\n");
                 sb.Append("Очищено ");
                 sb.Append(ConvertCacheSize());
 
@@ -164,7 +202,7 @@ namespace _1C_Cache_Cleaning
         }
 
         // Start button hover action
-        private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void startButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (mouseCount == 0) {
                 startButton.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Hover.bmp", UriKind.Relative));
@@ -176,6 +214,23 @@ namespace _1C_Cache_Cleaning
         private void startButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             startButton.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Normal.bmp", UriKind.Relative));
+            mouseCount = 0;
+        }
+
+        // Aggressive start button hover action
+        private void startButtonAgg_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (mouseCount == 0)
+            {
+                startButtonAggressive.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartAgg_Hover.bmp", UriKind.Relative));
+                mouseCount += 1;
+            }
+        }
+
+        // Aggressive start button leave action
+        private void startButtonAgg_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            startButtonAggressive.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartAgg_Normal.bmp", UriKind.Relative));
             mouseCount = 0;
         }
     }
