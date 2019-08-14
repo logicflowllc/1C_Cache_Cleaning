@@ -42,25 +42,23 @@ namespace _1C_Cache_Cleaning
                 foreach (Process process in Process.GetProcessesByName("1cv8"))
                 {
                     process.Kill();
+                    process.WaitForExit();
                 }
                 foreach (Process process in Process.GetProcessesByName("1cv8c"))
                 {
                     process.Kill();
+                    process.WaitForExit();
                 }
                 // Calling for cleaning
                 Process[] proc1cv8 = Process.GetProcessesByName("1cv8");
-                if (proc1cv8.Length == 0)
-                {
-                    StartCleaning();
-                }
                 Process[] proc1cv8c = Process.GetProcessesByName("1cv8c");
-                if (proc1cv8c.Length == 0)
+                if (proc1cv8.Length == 0 && proc1cv8c.Length == 0)
                 {
                     StartCleaning();
                 }
             }
-            catch {
-                MessageBox.Show("Error");
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -142,9 +140,9 @@ namespace _1C_Cache_Cleaning
                             
                         Directory.Delete(CachePath, true);
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте завершить все процессы 1С через диспетчер задач либо запустите очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок.", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте:\n• запустить очистку в агрессивном режиме\n• завершить все процессы 1С через диспетчер задач\n• запустить очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         // Errors count increment
                         errorsCount += 1;
 

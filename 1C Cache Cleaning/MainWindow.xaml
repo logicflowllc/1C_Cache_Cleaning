@@ -11,14 +11,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="224" Margin="185,81,0,-4" Source="Images/LF_BG.png" Opacity="0.1"/>
+        <Image HorizontalAlignment="Left" Height="234" VerticalAlignment="Top" Width="264" Margin="145,47,0,-4" Source="Images/LF_BG.png" Opacity="0.1"/>
 
         <Label x:Name="Label_Syn1" Content="Утилита выполняет удаление кэша 1С:Предприятие." HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" Padding="0" Width="389" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="Gainsboro" Height="16" HorizontalContentAlignment="Center" FontSize="11"/>
         <Label x:Name="Label_Syn4" Content="Сохраните все документы и завершите все сеансы 1С до начала чистки!" HorizontalAlignment="Center" Margin="10,27,10,0" VerticalAlignment="Top" Padding="0" Width="389" Foreground="#FFC63535" Background="{x:Null}" HorizontalContentAlignment="Center" FontSize="11"/>
         <Label x:Name="Label_LF" Content="LogicFlow LLC." HorizontalAlignment="Left" Margin="322,254,0,0" VerticalAlignment="Top" Padding="0" Width="77" FontSize="10" Foreground="#FF789DFF" MouseLeftButtonUp="LabelLF_MouseLeftButtonUp" Background="{x:Null}" HorizontalContentAlignment="Right" Cursor="Hand"/>
         <Label x:Name="Label_GitHub" Content="GitHub" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Padding="0" Width="35" FontSize="10" Foreground="#FF789DFF" MouseLeftButtonUp="Label_GitHub_MouseLeftButtonUp" Background="{x:Null}" Cursor="Hand"/>
         <Image x:Name="startButton" HorizontalAlignment="Center" Height="100" Margin="80,63,229,114" VerticalAlignment="Center" Width="100" Source="Images/1CCC_Start_Normal.bmp" MouseDown="CacheCleaningButton_Click" MouseEnter="startButton_MouseEnter" MouseLeave="startButton_MouseLeave" Stretch="UniformToFill" Cursor="Hand"/>
-        <Label x:Name="Label_Version" Content="0.2.1408.1010" HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" Padding="0" Width="73" FontSize="10" Foreground="#FF494949" Background="{x:Null}"/>
+        <Label x:Name="Label_Version" Content="0.2.1408.1200" HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" Padding="0" Width="73" FontSize="10" Foreground="#FF494949" Background="{x:Null}"/>
         <Image x:Name="startButtonAggressive" HorizontalAlignment="Center" Height="100" Margin="230,63,79,114" VerticalAlignment="Center" Width="100" Source="Images/1CCC_StartAgg_Normal.bmp" MouseDown="CacheCleaningButtonAggressive_Click" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave" Stretch="UniformToFill" Cursor="Hand"/>
         <Label x:Name="StartLabelTitle" Content="Обычный режим" HorizontalAlignment="Left" Margin="80,168,0,0" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="17" Foreground="#FF366BEC" Padding="0"/>
         <Label x:Name="StartAggLabelTitle" Content="Агрессивный режим" HorizontalAlignment="Left" Margin="223,168,0,0" VerticalAlignment="Top" Width="114" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="17" Foreground="#FFEC3636" Padding="0"/>
