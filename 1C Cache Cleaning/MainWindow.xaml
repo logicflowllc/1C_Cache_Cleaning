@@ -23,7 +23,7 @@
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Label x:Name="Label_Version" Content="0.2.0808.2359" HorizontalAlignment="Left" Margin="9,189,0,0" VerticalAlignment="Top" Padding="0" Width="73" FontSize="10" Foreground="#FF494949" Background="{x:Null}"/>
+        <Label x:Name="Label_Version" Content="0.2.1408.1010" HorizontalAlignment="Left" Margin="9,189,0,0" VerticalAlignment="Top" Padding="0" Width="73" FontSize="10" Foreground="#FF494949" Background="{x:Null}"/>
 
     </Grid>
 </Window>

@@ -106,7 +106,7 @@ namespace _1C_Cache_Cleaning
                     }
                     catch
                     {
-                        MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте завершить все процессы 1С через диспетчер задач либо запустите очистку после перезагрузки ПК", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте завершить все процессы 1С через диспетчер задач либо запустите очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок.", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         // Errors count increment
                         errorsCount += 1;
 
