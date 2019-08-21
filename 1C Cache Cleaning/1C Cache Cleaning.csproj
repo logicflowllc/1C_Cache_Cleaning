@@ -25,8 +25,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>551</ApplicationRevision>
-    <ApplicationVersion>0.2.2108.%2a</ApplicationVersion>
+    <ApplicationRevision>613</ApplicationRevision>
+    <ApplicationVersion>0.2.2108.613</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -125,9 +125,6 @@
     <Resource Include="Images\1CCC_StartAgg_Normal.bmp" />
     <Resource Include="Images\1CCC_Start_Hover.bmp" />
     <Resource Include="Images\1CCC_Start_Normal.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\LF_BG.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\LF_Logo_Horiz_Small_Edges.png" />
