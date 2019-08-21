@@ -140,7 +140,7 @@ namespace _1C_Cache_Cleaning
                             
                         Directory.Delete(CachePath, true);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте:\n• запустить очистку в агрессивном режиме\n• завершить все процессы 1С через диспетчер задач\n• запустить очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         // Errors count increment
@@ -188,22 +188,28 @@ namespace _1C_Cache_Cleaning
         }
 
         // Open Logic Flow web site
-        private void LabelLF_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void LabelLF_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("https://logicflow.ru");
         }
 
         // Open GitHub web site
-        private void Label_GitHub_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void LabelGitHub_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("https://github.com/dtinside/1C_Cache_Cleaning");
+        }
+
+        // Open GitHub Releases site
+        private void LabelGitHubReleases_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/dtinside/1C_Cache_Cleaning/releases");
         }
 
         // Start button hover action
         private void startButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (mouseCount == 0) {
-                startButton.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Hover.bmp", UriKind.Relative));
+                buttonStart.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Hover.bmp", UriKind.Relative));
                 mouseCount += 1;
             }
         }
@@ -211,7 +217,7 @@ namespace _1C_Cache_Cleaning
         // Start button leave action
         private void startButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            startButton.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Normal.bmp", UriKind.Relative));
+            buttonStart.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Normal.bmp", UriKind.Relative));
             mouseCount = 0;
         }
 
