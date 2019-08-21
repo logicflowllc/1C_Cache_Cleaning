@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace _1C_Cache_Cleaning
@@ -193,6 +194,22 @@ namespace _1C_Cache_Cleaning
             Process.Start("https://logicflow.ru");
         }
 
+        // LogicFlow Logo Hover Action
+        private void LogicFlow_Site_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (mouseCount == 0)
+            {
+                LogicFlow_Site.Opacity = 1;
+                mouseCount += 1;
+            }
+        }
+
+        private void LogicFlow_Site_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            LogicFlow_Site.Opacity = 0.4;
+            mouseCount = 0;
+        }
+
         // Open GitHub web site
         private void LabelGitHub_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -205,11 +222,14 @@ namespace _1C_Cache_Cleaning
             Process.Start("https://github.com/dtinside/1C_Cache_Cleaning/releases");
         }
 
+
+
         // Start button hover action
         private void startButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (mouseCount == 0) {
                 buttonStart.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Hover.bmp", UriKind.Relative));
+                LabelCacheButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 123, 255));
                 mouseCount += 1;
             }
         }
@@ -218,6 +238,7 @@ namespace _1C_Cache_Cleaning
         private void startButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             buttonStart.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Normal.bmp", UriKind.Relative));
+            LabelCacheButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(97, 107, 117));
             mouseCount = 0;
         }
 
@@ -226,7 +247,8 @@ namespace _1C_Cache_Cleaning
         {
             if (mouseCount == 0)
             {
-                startButtonAggressive.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartAgg_Hover.bmp", UriKind.Relative));
+                buttonStartAggressive.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartAgg_Hover.bmp", UriKind.Relative));
+                LabelCacheButtonAggTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(204, 37, 37));
                 mouseCount += 1;
             }
         }
@@ -234,7 +256,8 @@ namespace _1C_Cache_Cleaning
         // Aggressive start button leave action
         private void startButtonAgg_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            startButtonAggressive.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartAgg_Normal.bmp", UriKind.Relative));
+            buttonStartAggressive.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartAgg_Normal.bmp", UriKind.Relative));
+            LabelCacheButtonAggTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(117, 97, 97));
             mouseCount = 0;
         }
     }
