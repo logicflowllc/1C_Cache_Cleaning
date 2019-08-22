@@ -24,7 +24,7 @@
             <Image x:Name="buttonStartAggressive" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="229,62,0,0" Source="Images/1CCC_StartAgg_Normal.bmp" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave" MouseDown="CacheCleaningButtonAggressive_Click" Focusable="True"/>
         </Grid>
         <Grid x:Name="Bottom" Margin="0,347,0,0" Background="#FF1A1A1D">
-            <Label x:Name="AppVersion" Content="0.2.2108.648" HorizontalAlignment="Left" Width="64" Padding="0,5,0,0" Foreground="#FF38383E" FontSize="10" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="32,0,0,0" ToolTip="Посмотреть релизы на GitHub"/>
+            <Label x:Name="AppVersion" Content="0.2.2208.925" HorizontalAlignment="Left" Width="64" Padding="0,5,0,0" Foreground="#FF38383E" FontSize="10" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="32,0,0,0" ToolTip="Посмотреть релизы на GitHub"/>
             <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Right" Width="33" Margin="0,0,34,0" Padding="0,5,0,0" Foreground="#FF38383E" FontSize="10" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub"/>
 
 
