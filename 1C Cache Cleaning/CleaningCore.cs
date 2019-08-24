@@ -9,12 +9,13 @@ namespace _1C_Cache_Cleaning
     {
         // Counter of cache size
         private double CacheSize = 0L;
+        private double TempSize = 0L;
         private byte ErrorCount = 0;
 
 
         // Start of cache cleaning
         // Find all cache directories and clean it
-        public void StartCleaning()
+        public void StartCacheCleaning()
         {
             CacheSize = 0;
 
@@ -37,7 +38,7 @@ namespace _1C_Cache_Cleaning
                 if (Directory.Exists(AppDataLocalGlobal + CurrentLocalPath))
                 {
                     string[] LocalSubDirs = Directory.GetDirectories(AppDataLocalGlobal + CurrentLocalPath, "*", SearchOption.TopDirectoryOnly);
-                    DirsDeleting(LocalSubDirs);
+                    CacheDirsDeleting(LocalSubDirs);
                 }
             }
 
@@ -47,7 +48,7 @@ namespace _1C_Cache_Cleaning
                 if (Directory.Exists(AppDataRoamingGlobal + CurrentLocalPath))
                 {
                     string[] LocalSubDirs = Directory.GetDirectories(AppDataRoamingGlobal + CurrentLocalPath, "*", SearchOption.TopDirectoryOnly);
-                    DirsDeleting(LocalSubDirs);
+                    CacheDirsDeleting(LocalSubDirs);
                 }
             }
 
@@ -55,7 +56,7 @@ namespace _1C_Cache_Cleaning
             StringBuilder sb = new StringBuilder();
             sb.Append("Очистка кэша 1С завершена.\n\n");
             sb.Append("Очищено ");
-            sb.Append(ConvertCacheSize());
+            sb.Append(ConvertSize(CacheSize));
 
             MessageBox.Show(sb.ToString(), "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -63,7 +64,7 @@ namespace _1C_Cache_Cleaning
 
         // Cleaning 
         // Foreach all cache dirictories
-        private void DirsDeleting(string[] TargetPaths)
+        private void CacheDirsDeleting(string[] TargetPaths)
         {
             // Foreach all subfolders
             foreach (string CachePath in TargetPaths)
@@ -106,27 +107,33 @@ namespace _1C_Cache_Cleaning
             }
         }
 
-        // Convert cache size 
-        private string ConvertCacheSize()
+        // Start of temp deleting
+        public void StartTempCleaning (string TargetPath)
         {
-            if ((CacheSize > (1024 * 1024 * 1024)))
+            MessageBox.Show(TargetPath);
+        }
+
+        // Convert cache size 
+        private string ConvertSize(double CurrentSize)
+        {
+            if ((CurrentSize > (1024 * 1024 * 1024)))
             {
-                double temp = Convert.ToDouble(CacheSize) / (1024 * 1024 * 1024);
+                double temp = Convert.ToDouble(CurrentSize) / (1024 * 1024 * 1024);
                 return temp.ToString("0.00") + " GB";
             }
-            else if ((CacheSize < (1024 * 1024 * 1024)) && (CacheSize > (1024 * 1024)))
+            else if ((CurrentSize < (1024 * 1024 * 1024)) && (CurrentSize > (1024 * 1024)))
             {
-                double temp = Convert.ToDouble(CacheSize) / (1024 * 1024);
+                double temp = Convert.ToDouble(CurrentSize) / (1024 * 1024);
                 return temp.ToString("0.00") + " MB";
             }
-            else if (CacheSize < 1024 * 1024 && CacheSize > 1024)
+            else if (CurrentSize < 1024 * 1024 && CurrentSize > 1024)
             {
-                double temp = Convert.ToDouble(CacheSize) / (1024);
+                double temp = Convert.ToDouble(CurrentSize) / (1024);
                 return temp.ToString("0.00") + " KB";
             }
-            else if (CacheSize < 1024 && CacheSize > 0)
+            else if (CurrentSize < 1024 && CurrentSize > 0)
             {
-                return CacheSize.ToString() + " B";
+                return CurrentSize.ToString() + " B";
             }
             else
             {

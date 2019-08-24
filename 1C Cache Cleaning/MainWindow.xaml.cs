@@ -14,6 +14,8 @@ namespace _1C_Cache_Cleaning
     {
         // Mouse hover counter
         private int mouseCount = 0;
+        private SortedDictionary<string, string> DBList;
+
 
         public MainWindow()
         {
@@ -21,8 +23,10 @@ namespace _1C_Cache_Cleaning
 
             //Get local file DB List
             DBsFinder dbsf = new DBsFinder();
-            
-            foreach (KeyValuePair<string, string> kvp in dbsf.getDBsList())
+
+            DBList = dbsf.getDBsList();
+
+            foreach (KeyValuePair<string, string> kvp in DBList)
             {
                 ComboBox1CDBsList.Items.Add(kvp.Key);
             }
@@ -33,7 +37,7 @@ namespace _1C_Cache_Cleaning
         {
             // Calling for cleaning
             CleaningCore cc = new CleaningCore();
-            cc.StartCleaning();
+            cc.StartCacheCleaning();
         }
 
         // Start button handler with killing 1C processes
@@ -59,12 +63,19 @@ namespace _1C_Cache_Cleaning
                 {
                     // Calling for cleaning
                     CleaningCore cc = new CleaningCore();
-                    cc.StartCleaning();
+                    cc.StartCacheCleaning();
                 }
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        //
+        private void ButtonStartCleaningTemp_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            CleaningCore cc = new CleaningCore();
+            cc.StartTempCleaning(DBList[ComboBox1CDBsList.SelectedValue.ToString()]);
         }
 
         #region UI_Handlers
@@ -141,11 +152,6 @@ namespace _1C_Cache_Cleaning
         }
         #endregion
 
-        private void ButtonStartTemp_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            //Dictionary<string, string> d = new Dictionary<string, string>();
-            //DBsFinder dbsf = new DBsFinder();
-            //dbsf.getDBsList(d);
-        }
+
     }
 }
