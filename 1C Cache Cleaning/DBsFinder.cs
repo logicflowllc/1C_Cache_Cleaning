@@ -22,12 +22,12 @@ namespace _1C_Cache_Cleaning
                     string CurrentDBName = Allv8iLines[index - 1].Substring(1, Allv8iLines[index - 1].Length - 2);
 
                     // Get DB name in startup menu with replaced slashes
-                    string CurrentFolderName = Allv8iLines[index + 3].Substring(8, Allv8iLines[index + 3].Length - 8).Replace("/",  " > ");
+                    string CurrentFolderName = Allv8iLines[index + 3].Substring(8, Allv8iLines[index + 3].Length - 8).Replace("/",  " / ");
                     
                     // Add right name into the list (with subfolders or without)
                     if (CurrentFolderName != "")
                     {
-                        CurrentDBName = CurrentFolderName + " > " + CurrentDBName;
+                        CurrentDBName = CurrentFolderName + " / " + CurrentDBName;
                     }
 
                     // Get DB path
