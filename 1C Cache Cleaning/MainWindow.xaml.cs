@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
@@ -17,6 +18,14 @@ namespace _1C_Cache_Cleaning
         public MainWindow()
         {
             InitializeComponent();
+
+            //Get local file DB List
+            DBsFinder dbsf = new DBsFinder();
+            
+            foreach (KeyValuePair<string, string> kvp in dbsf.getDBsList())
+            {
+                ComboBox1CDBsList.Items.Add(kvp.Key);
+            }
         }
 
         // Start button handler
@@ -58,7 +67,7 @@ namespace _1C_Cache_Cleaning
             }
         }
 
-        #region UI
+        #region UI_Handlers
         // Open Logic Flow web site
         private void LabelLF_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -131,5 +140,12 @@ namespace _1C_Cache_Cleaning
             mouseCount = 0;
         }
         #endregion
+
+        private void ButtonStartTemp_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            //Dictionary<string, string> d = new Dictionary<string, string>();
+            //DBsFinder dbsf = new DBsFinder();
+            //dbsf.getDBsList(d);
+        }
     }
 }

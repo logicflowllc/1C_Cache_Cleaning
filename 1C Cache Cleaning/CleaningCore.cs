@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows;
 
@@ -10,14 +8,15 @@ namespace _1C_Cache_Cleaning
     class CleaningCore
     {
         // Counter of cache size
-        private double cacheSize = 0L;
+        private double CacheSize = 0L;
+        private byte ErrorCount = 0;
 
 
         // Start of cache cleaning
         // Find all cache directories and clean it
         public void StartCleaning()
         {
-            cacheSize = 0;
+            CacheSize = 0;
 
             // Get Local and Roaming dirs paths 
             string AppDataLocalGlobal = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -77,19 +76,28 @@ namespace _1C_Cache_Cleaning
                 {
                     try
                     {
+                        double TempCacheSize = 0L;
+
                         string[] allFiles = Directory.GetFiles(CachePath, "*.*", SearchOption.AllDirectories);
 
                         foreach (string fileName in allFiles)
                         {
                             FileInfo info = new FileInfo(fileName);
-                            cacheSize += info.Length;
+                            TempCacheSize += info.Length;
                         }
 
                         Directory.Delete(CachePath, true);
+
+                        // in a case of error, current cache size will be deleted
+                        CacheSize += TempCacheSize;
                     }
                     catch
                     {
-                        MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте:\n• запустить очистку в агрессивном режиме\n• завершить все процессы 1С через диспетчер задач\n• запустить очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        if (ErrorCount == 0) { 
+                            MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте:\n• запустить очистку в агрессивном режиме\n• завершить все процессы 1С через диспетчер задач\n• запустить очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        }
+
+                        ErrorCount++;
 
                         // Break
                         return;
@@ -101,24 +109,24 @@ namespace _1C_Cache_Cleaning
         // Convert cache size 
         private string ConvertCacheSize()
         {
-            if ((cacheSize > (1024 * 1024 * 1024)))
+            if ((CacheSize > (1024 * 1024 * 1024)))
             {
-                double temp = Convert.ToDouble(cacheSize) / (1024 * 1024 * 1024);
+                double temp = Convert.ToDouble(CacheSize) / (1024 * 1024 * 1024);
                 return temp.ToString("0.00") + " GB";
             }
-            else if ((cacheSize < (1024 * 1024 * 1024)) && (cacheSize > (1024 * 1024)))
+            else if ((CacheSize < (1024 * 1024 * 1024)) && (CacheSize > (1024 * 1024)))
             {
-                double temp = Convert.ToDouble(cacheSize) / (1024 * 1024);
+                double temp = Convert.ToDouble(CacheSize) / (1024 * 1024);
                 return temp.ToString("0.00") + " MB";
             }
-            else if (cacheSize < 1024 * 1024 && cacheSize > 1024)
+            else if (CacheSize < 1024 * 1024 && CacheSize > 1024)
             {
-                double temp = Convert.ToDouble(cacheSize) / (1024);
+                double temp = Convert.ToDouble(CacheSize) / (1024);
                 return temp.ToString("0.00") + " KB";
             }
-            else if (cacheSize < 1024 && cacheSize > 0)
+            else if (CacheSize < 1024 && CacheSize > 0)
             {
-                return cacheSize.ToString() + " B";
+                return CacheSize.ToString() + " B";
             }
             else
             {

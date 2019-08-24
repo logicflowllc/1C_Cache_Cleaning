@@ -12,7 +12,7 @@
         </Border>
         <Grid x:Name="TempGrid" Margin="462,106,0,0" Background="#FF1A1A1D" HorizontalAlignment="Left" Width="398" Height="213" VerticalAlignment="Top">
             <Label VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="LabelTitleTemp" Content="Очистка временных файлов" Foreground="White" Background="#FF212125" FontSize="16" Padding="15,8,5,5" Width="398" Height="40"/>
-            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="332" Margin="34,62,0,0" Height="30" Background="#FF212125"/>
+            <ComboBox x:Name="ComboBox1CDBsList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="332" Margin="34,62,0,0" Height="30" Background="#FF212125"/>
             <Button x:Name="buttonStartTemp" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="150,117,0,0" Height="45"/>
             <Label x:Name="LabelTempButtonTitle" Content="Агрессивная очистка" HorizontalAlignment="Left" Margin="132,176,0,0" VerticalAlignment="Top" Foreground="#FF756161" Width="136" Padding="0,0,0,-3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="20"/>
         </Grid>
@@ -24,7 +24,7 @@
             <Image x:Name="buttonStartAggressive" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="229,62,0,0" Source="Images/1CCC_StartAgg_Normal.bmp" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave" MouseDown="CacheCleaningButtonAggressive_Click" Focusable="True"/>
         </Grid>
         <Grid x:Name="Bottom" Margin="0,347,0,0" Background="#FF1A1A1D">
-            <Label x:Name="AppVersion" Content="0.2.2208.925" HorizontalAlignment="Left" Width="64" Padding="0,5,0,0" Foreground="#FF38383E" FontSize="10" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="32,0,0,0" ToolTip="Посмотреть релизы на GitHub"/>
+            <Label x:Name="AppVersion" Content="0.2.2408.1020" HorizontalAlignment="Left" Width="64" Padding="0,5,0,0" Foreground="#FF38383E" FontSize="10" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="32,0,0,0" ToolTip="Посмотреть релизы на GitHub"/>
             <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Right" Width="33" Margin="0,0,34,0" Padding="0,5,0,0" Foreground="#FF38383E" FontSize="10" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub"/>
 
 
