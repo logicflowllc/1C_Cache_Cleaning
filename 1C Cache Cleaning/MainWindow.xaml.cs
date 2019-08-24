@@ -14,6 +14,7 @@ namespace _1C_Cache_Cleaning
     {
         // Mouse hover counter
         private int mouseCount = 0;
+        // List of databases and paths
         private SortedDictionary<string, string> DBList;
 
 
@@ -23,12 +24,12 @@ namespace _1C_Cache_Cleaning
 
             //Get local file DB List
             DBsFinder dbsf = new DBsFinder();
-
             DBList = dbsf.getDBsList();
 
             foreach (KeyValuePair<string, string> kvp in DBList)
             {
-                ComboBox1CDBsList.Items.Add(kvp.Key);
+
+                ListBoxDB.Items.Add(kvp.Key);
             }
         }
 
@@ -71,11 +72,11 @@ namespace _1C_Cache_Cleaning
             }
         }
 
-        //
+        // Send DB path to Cleaning Core
         private void ButtonStartCleaningTemp_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             CleaningCore cc = new CleaningCore();
-            cc.StartTempCleaning(DBList[ComboBox1CDBsList.SelectedValue.ToString()]);
+            cc.StartTempCleaning(DBList[ListBoxDB.SelectedValue.ToString()]);
         }
 
         #region UI_Handlers
