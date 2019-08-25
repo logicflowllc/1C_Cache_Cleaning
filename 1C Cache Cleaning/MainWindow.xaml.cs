@@ -62,22 +62,38 @@ namespace _1C_Cache_Cleaning
         // Start button handler with killing 1C processes
         private void CacheCleaningButtonAggressive_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            try
-            {
-                KillAll1C();
+            string MessageBoxText = "Все процессы 1С будут принудительно завершены.\n\nПродолжить?";
+            string Caption = "Очистка файлов кэша";
 
-                // Calling for cleaning
-                Process[] proc1cv8 = Process.GetProcessesByName("1cv8");
-                Process[] proc1cv8c = Process.GetProcessesByName("1cv8c");
-                if (proc1cv8.Length == 0 && proc1cv8c.Length == 0)
-                {
-                    // Calling for cleaning
-                    CleaningCore cc = new CleaningCore();
-                    cc.StartCacheCleaning();
-                }
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+            MessageBoxButton MessageBoxButtons = MessageBoxButton.YesNo;
+            MessageBoxImage MessageBoxIcons = MessageBoxImage.Warning;
+
+            MessageBoxResult MessageBoxPressed = MessageBox.Show(MessageBoxText, Caption, MessageBoxButtons, MessageBoxIcons);
+
+            switch (MessageBoxPressed)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        KillAll1C();
+
+                        // Calling for cleaning
+                        Process[] proc1cv8 = Process.GetProcessesByName("1cv8");
+                        Process[] proc1cv8c = Process.GetProcessesByName("1cv8c");
+                        if (proc1cv8.Length == 0 && proc1cv8c.Length == 0)
+                        {
+                            // Calling for cleaning
+                            CleaningCore cc = new CleaningCore();
+                            cc.StartCacheCleaning();
+                        }
+                    }
+                    catch (Exception ex) {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    break;
+
+                case MessageBoxResult.No:
+                    break;
             }
         }
 
@@ -86,15 +102,32 @@ namespace _1C_Cache_Cleaning
         {
             if (ListBoxDB.SelectedIndex != -1)
             {
-                string path = DBList[ListBoxDB.SelectedValue.ToString()];
+                string MessageBoxText = "Все процессы 1С будут принудительно завершены.\n\nПродолжить?";
+                string Caption = "Очистка временных файлов";
 
-                KillAll1C();
+                MessageBoxButton MessageBoxButtons = MessageBoxButton.YesNo;
+                MessageBoxImage MessageBoxIcons = MessageBoxImage.Warning;
 
-                CleaningCore cc = new CleaningCore();
-                cc.StartTempCleaning(DBList[ListBoxDB.SelectedValue.ToString()], ListBoxDB.SelectedItem.ToString());
-            } else
+                MessageBoxResult MessageBoxPressed = MessageBox.Show(MessageBoxText, Caption, MessageBoxButtons, MessageBoxIcons);
+
+                switch (MessageBoxPressed)
+                {
+                    case MessageBoxResult.Yes:
+                        string path = DBList[ListBoxDB.SelectedValue.ToString()];
+
+                        KillAll1C();
+
+                        CleaningCore cc = new CleaningCore();
+                        cc.StartTempCleaning(DBList[ListBoxDB.SelectedValue.ToString()], ListBoxDB.SelectedItem.ToString());
+                        break;
+
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
             {
-                MessageBox.Show("Пожалуйста, выберите базу данных из списка", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Пожалуйста, выберите базу данных из списка", "База данных не выбрана", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -113,7 +146,7 @@ namespace _1C_Cache_Cleaning
                 }
             } else
             {
-                MessageBox.Show("Пожалуйста, выберите базу данных из списка", "", MessageBoxButton.OK, MessageBoxImage. Warning);
+                MessageBox.Show("Пожалуйста, выберите базу данных из списка", "База данных не выбрана", MessageBoxButton.OK, MessageBoxImage. Warning);
             }
         }
 
