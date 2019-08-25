@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -34,6 +35,22 @@ namespace _1C_Cache_Cleaning
             }
         }
 
+        private void KillAll1C ()
+        {
+            // Kill all processes
+            foreach (Process process in Process.GetProcessesByName("1cv8"))
+            {
+                process.Kill();
+                process.WaitForExit();
+            }
+            foreach (Process process in Process.GetProcessesByName("1cv8c"))
+            {
+                process.Kill();
+                process.WaitForExit();
+            }
+        }
+
+
         // Start button handler
         private void CacheCleaningButton_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -47,17 +64,8 @@ namespace _1C_Cache_Cleaning
         {
             try
             {
-                // Kill all processes
-                foreach (Process process in Process.GetProcessesByName("1cv8"))
-                {
-                    process.Kill();
-                    process.WaitForExit();
-                }
-                foreach (Process process in Process.GetProcessesByName("1cv8c"))
-                {
-                    process.Kill();
-                    process.WaitForExit();
-                }
+                KillAll1C();
+
                 // Calling for cleaning
                 Process[] proc1cv8 = Process.GetProcessesByName("1cv8");
                 Process[] proc1cv8c = Process.GetProcessesByName("1cv8c");
@@ -76,11 +84,41 @@ namespace _1C_Cache_Cleaning
         // Send DB path to Cleaning Core
         private void ButtonStartCleaningTemp_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            CleaningCore cc = new CleaningCore();
-            cc.StartTempCleaning(DBList[ListBoxDB.SelectedValue.ToString()]);
+            if (ListBoxDB.SelectedIndex != -1)
+            {
+                string path = DBList[ListBoxDB.SelectedValue.ToString()];
+
+                KillAll1C();
+
+                CleaningCore cc = new CleaningCore();
+                cc.StartTempCleaning(DBList[ListBoxDB.SelectedValue.ToString()], ListBoxDB.SelectedItem.ToString());
+            } else
+            {
+                MessageBox.Show("Пожалуйста, выберите базу данных из списка", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
-        #region UI_Handlers
+        // Open selected DB folder
+        private void ButtonTempOpenFolder_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (ListBoxDB.SelectedIndex != -1)
+            {
+                if (Directory.Exists(DBList[ListBoxDB.SelectedValue.ToString()]))
+                {
+                    Process.Start("explorer.exe", DBList[ListBoxDB.SelectedValue.ToString()]);
+                }
+                else
+                {
+                    MessageBox.Show("Выбранная база данных не найдена", "Путь не найден", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            } else
+            {
+                MessageBox.Show("Пожалуйста, выберите базу данных из списка", "", MessageBoxButton.OK, MessageBoxImage. Warning);
+            }
+        }
+
+        #region UI_Handlers_Visuals 
+        /////////////////////////////////////////////////////////
         // Open Logic Flow web site
         private void LabelLF_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -104,13 +142,14 @@ namespace _1C_Cache_Cleaning
             mouseCount = 0;
         }
 
+        /////////////////////////////////////////////////////////
         // Bottom labels hover
         private void BottomTitles_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var currentLabel = (Label)sender;
             if (currentLabel != null && mouseCount == 0)
             {
-                currentLabel.Foreground = new SolidColorBrush(Color.FromRgb(87, 110, 255));
+                currentLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 123, 255));
             }
             mouseCount = 1;
         }
@@ -120,11 +159,12 @@ namespace _1C_Cache_Cleaning
             var currentLabel = (Label)sender;
             if (currentLabel != null && mouseCount == 1)
             {
-                currentLabel.Foreground = new SolidColorBrush(Color.FromRgb(56, 56, 62));
+                currentLabel.Foreground = new SolidColorBrush(Color.FromRgb(103, 103, 116));
             }
             mouseCount = 0;
         }
 
+        /////////////////////////////////////////////////////////
         // Open GitHub web site
         private void LabelGitHub_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -137,6 +177,7 @@ namespace _1C_Cache_Cleaning
             Process.Start("https://github.com/dtinside/1C_Cache_Cleaning/releases");
         }
 
+        /////////////////////////////////////////////////////////
         // Start button hover action
         private void startButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -151,10 +192,11 @@ namespace _1C_Cache_Cleaning
         private void startButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             buttonStart.Source = new BitmapImage(new Uri(@"\Images\1CCC_Start_Normal.bmp", UriKind.Relative));
-            LabelCacheButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(97, 107, 117));
+            LabelCacheButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(183, 201, 218));
             mouseCount = 0;
         }
 
+        /////////////////////////////////////////////////////////
         // Aggressive start button hover action
         private void startButtonAgg_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -170,11 +212,12 @@ namespace _1C_Cache_Cleaning
         private void startButtonAgg_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             buttonStartAggressive.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartAgg_Normal.bmp", UriKind.Relative));
-            LabelCacheButtonAggTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(117, 97, 97));
+            LabelCacheButtonAggTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(199, 146, 146));
             mouseCount = 0;
         }
 
-        // Aggressive start button hover action
+        /////////////////////////////////////////////////////////
+        // Temp start button hover action
         private void startButtonTempAgg_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (mouseCount == 0)
@@ -189,11 +232,34 @@ namespace _1C_Cache_Cleaning
         private void startButtonTempAgg_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             buttonStartCleaningTemp.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartTempAgg_Normal.bmp", UriKind.Relative));
-            LabelTempButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(117, 97, 97));
+            LabelTempButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(199, 146, 146));
             mouseCount = 0;
         }
 
+        /////////////////////////////////////////////////////////
+        // Show selected DB path in Temp block
+        private void ListBoxDB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LabelTempDBPath.Content = DBList[ListBoxDB.SelectedValue.ToString()];
+        }
 
+        /////////////////////////////////////////////////////////
+        private void ButtonTempOpenFolder_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (mouseCount == 0)
+            {
+                ButtonTempOpenFolder.Source = new BitmapImage(new Uri(@"\Images\1CCC_OpenFolder_Hover.bmp", UriKind.Relative));
+                mouseCount += 1;
+            }
+        }
+
+        private void ButtonTempOpenFolder_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ButtonTempOpenFolder.Source = new BitmapImage(new Uri(@"\Images\1CCC_OpenFolder_Normal.bmp", UriKind.Relative));
+            mouseCount = 0;
+        }
         #endregion
+
+
     }
 }

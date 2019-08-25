@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -79,12 +80,12 @@ namespace _1C_Cache_Cleaning
                     {
                         double TempCacheSize = 0L;
 
-                        string[] allFiles = Directory.GetFiles(CachePath, "*.*", SearchOption.AllDirectories);
+                        string[] AllCacheFiles = Directory.GetFiles(CachePath, "*.*", SearchOption.AllDirectories);
 
-                        foreach (string fileName in allFiles)
+                        foreach (string FileName in AllCacheFiles)
                         {
-                            FileInfo info = new FileInfo(fileName);
-                            TempCacheSize += info.Length;
+                            FileInfo Info = new FileInfo(FileName);
+                            TempCacheSize += Info.Length;
                         }
 
                         Directory.Delete(CachePath, true);
@@ -108,9 +109,59 @@ namespace _1C_Cache_Cleaning
         }
 
         // Start of temp deleting
-        public void StartTempCleaning (string TargetPath)
+        public void StartTempCleaning (string SelectedDBPath, string SelectedDBName)
         {
-            MessageBox.Show(TargetPath);
+            TempSize = 0;
+
+            // List of temp files extensions
+            List<string> TempExtensions = new List<string>() {"bin", "dat", "cfl", "log", "ind", "lck", "lgd", "1CL", "txt", "tmp", "lgf", "lgp"};
+
+            string[] SplitedDBName = SelectedDBName.Split('/');
+
+            try
+            {
+                // Remove all escapes
+                string DBPath = SelectedDBPath.Replace(@"\\", @"\");
+
+                // Check if directory exist on disk
+                if (Directory.Exists(DBPath))
+                {
+                    // Get all files 
+                    string[] AllTempFiles = Directory.GetFiles(DBPath, "*.*", SearchOption.AllDirectories);
+
+                    foreach (string FileName in AllTempFiles)
+                    {
+                        // Get current file extension
+                        string CurrentFileExtension = FileName.Substring(FileName.Length - 3, 3);
+
+                        // Check if temp extension list contains current file extension 
+                        // and check additional file name
+                        // if allright, store temp file size and delete file 
+                        if (TempExtensions.Contains(CurrentFileExtension) || FileName.Contains(@"1Cv8tmp.1CD"))
+                        {
+                            FileInfo Info = new FileInfo(FileName);
+                            TempSize += Info.Length;
+                            File.Delete(FileName);
+                        }
+                    }
+
+                    // Final message about cleaning status
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Очистка временных файлов базы данных\n");
+                    sb.Append(SplitedDBName[SplitedDBName.Length - 1].Trim() + " завершена.\n\n");
+                    sb.Append("Очищено ");
+                    sb.Append(ConvertSize(TempSize));
+
+                    MessageBox.Show(sb.ToString(), "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else
+                {
+                    MessageBox.Show("Путь к выбранной базе данных не найден", "Путь не найден", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         // Convert cache size 

@@ -31,7 +31,7 @@ namespace _1C_Cache_Cleaning
                     }
 
                     // Get DB path
-                    string CurrentDBPath = (Allv8iLines[index].Substring(14, Allv8iLines[index].Length - 15)).Replace(@"\\", @"\");
+                    string CurrentDBPath = (Allv8iLines[index].Substring(14, Allv8iLines[index].Length - 16)).Replace(@"\\", @"\");
 
                     if (Char.IsLetter(CurrentDBPath, 0))
                     {

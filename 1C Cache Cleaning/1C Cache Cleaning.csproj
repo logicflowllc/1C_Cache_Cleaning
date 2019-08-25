@@ -137,5 +137,11 @@
   <ItemGroup>
     <Resource Include="Images\LF_Logo_Horiz_Small_Edges.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1CCC_OpenFolder_Normal.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1CCC_OpenFolder_Hover.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
