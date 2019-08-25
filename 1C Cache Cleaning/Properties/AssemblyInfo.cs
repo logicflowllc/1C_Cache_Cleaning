@@ -6,7 +6,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("1C Cache Cleaning")]
-[assembly: AssemblyDescription("Очистка кэша 1С:Предприятие")]
+[assembly: AssemblyDescription("Очистка кэша и временных файлов 1С:Предприятие")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Logic Flow LLC.")]
 [assembly: AssemblyProduct("1C Cache Cleaning")]
@@ -49,5 +49,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.2408.2018")]
-[assembly: AssemblyFileVersion("0.2.2408.2018")]
+[assembly: AssemblyVersion("0.2.2508.806")]
+[assembly: AssemblyFileVersion("0.2.2508.806")]

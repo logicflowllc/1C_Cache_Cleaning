@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -103,6 +104,27 @@ namespace _1C_Cache_Cleaning
             mouseCount = 0;
         }
 
+        // Bottom labels hover
+        private void BottomTitles_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            var currentLabel = (Label)sender;
+            if (currentLabel != null && mouseCount == 0)
+            {
+                currentLabel.Foreground = new SolidColorBrush(Color.FromRgb(87, 110, 255));
+            }
+            mouseCount = 1;
+        }
+
+        private void BottomTitles_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            var currentLabel = (Label)sender;
+            if (currentLabel != null && mouseCount == 1)
+            {
+                currentLabel.Foreground = new SolidColorBrush(Color.FromRgb(56, 56, 62));
+            }
+            mouseCount = 0;
+        }
+
         // Open GitHub web site
         private void LabelGitHub_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -151,8 +173,27 @@ namespace _1C_Cache_Cleaning
             LabelCacheButtonAggTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(117, 97, 97));
             mouseCount = 0;
         }
+
+        // Aggressive start button hover action
+        private void startButtonTempAgg_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (mouseCount == 0)
+            {
+                buttonStartCleaningTemp.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartTempAgg_Hover.bmp", UriKind.Relative));
+                LabelTempButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(204, 37, 37));
+                mouseCount += 1;
+            }
+        }
+
+        // Aggressive start button leave action
+        private void startButtonTempAgg_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            buttonStartCleaningTemp.Source = new BitmapImage(new Uri(@"\Images\1CCC_StartTempAgg_Normal.bmp", UriKind.Relative));
+            LabelTempButtonTitle.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(117, 97, 97));
+            mouseCount = 0;
+        }
+
+
         #endregion
-
-
     }
 }

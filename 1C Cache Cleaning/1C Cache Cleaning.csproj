@@ -129,6 +129,12 @@
     <Resource Include="Images\1CCC_Start_Normal.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\1CCC_StartTempAgg_Normal.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1CCC_StartTempAgg_Hover.bmp" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\LF_Logo_Horiz_Small_Edges.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
