@@ -1,19 +1,28 @@
 # 1C Cache Cleaning
-Clear all 1C:Enterprise cache from *Application Data* folder for current user
-
-# Чистка кэша 1С:Предприятие
-Очищает весь кэш 1С:Предприятия из папок *Application Data* для текущего пользователя.
-
-Список папок, которые очищаются:
-* Application Data\Local\1C\1cv8
-* Application Data\Local\1C\1cv8t
-* Application Data\Local\1C\1Cv82
-* Application Data\Local\1C\1Cv82t
-* Application Data\Local\1C\1Cv83
-* Application Data\Roaming\1C\1cv8
-* Application Data\Roaming\1C\1cv8t
-* Application Data\Roaming\1C\1Cv82
-* Application Data\Roaming\1C\1Cv82t
-* Application Data\Roaming\1C\1Cv83
+Утилита для очистки кэша и временных файлов платформы 1С:Предприятие. Работает только с локальными файловыми базами данных.
 
 Требуется установленный .NET Framework 4. Никакие его возможности не используются, но в последних версиях ОС Windows его предшественники не установлены "из коробки".
+
+**Перед использованием утилиты, необходимо сохранить все документы, сохранить результаты работы и завершить все процессы 1С:Предприятие.**
+
+
+## Очистка кэша 
+Очищает весь кэш 1С из папок *Application Data* для текущего пользователя:
+* %LocalAppData%\1C\1cv8
+* %LocalAppData%\1C\1cv8t
+* %LocalAppData%\1C\1Cv82
+* %LocalAppData%\1C\1Cv82t
+* %LocalAppData%\1C\1Cv83
+* %AppData%\1C\1cv8
+* %AppData%\1C\1cv8t
+* %AppData%\1C\1Cv82
+* %AppData%\1C\1Cv82t
+* %AppData%\1C\1Cv83
+
+Работает в двух режимах:
+* **Обычная очистка** - очищает весь кэш, который не исполььзуется ни одним сеансом 1С
+* **Агрессивная очистка** - принудительно закрывает все сеансы 1С и после этого очищает весь кэш локального пользователя
+
+
+## Очистка временных файлов
+Происходит принудительное завершение всех процессов 1С:Предприятие, далее удаляются все временные файлы, находящихся в одной папке с файлов 1cv8.1CD.
