@@ -13,7 +13,7 @@
             <Image x:Name="buttonStartCleaningTemp" HorizontalAlignment="Right" Height="100" Margin="0,62,20,0" VerticalAlignment="Top" Width="100" Source="Images/1CCC_StartTempAgg_Normal.bmp" Stretch="Fill" MouseDown="ButtonStartCleaningTemp_MouseDown" MouseEnter="startButtonTempAgg_MouseEnter" MouseLeave="startButtonTempAgg_MouseLeave"/>
             <Grid Margin="20,62,21,15">
                 <ListBox x:Name="ListBoxDB" Margin="0,0,119,45" Background="#FF3B3B42" Foreground="White" BorderBrush="#FF3B3B42" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="ListBoxDB_SelectionChanged"/>
-                <Label x:Name="LabelTempDBPath" Content="D:\NITELaB\NITELaB 6 Division\LogicFlow" Foreground="White" Padding="10,6,10,0" Background="#FF3B3B42" Height="30" VerticalAlignment="Bottom" Margin="0,0,52,0" Cursor="Help" ToolTip="Путь выбранной базы данных"/>
+                <Label x:Name="LabelTempDBPath" Content="" Foreground="White" Padding="10,6,10,0" Background="#FF3B3B42" Height="30" VerticalAlignment="Bottom" Margin="0,0,52,0" Cursor="Help" ToolTip="Путь выбранной базы данных"/>
                 <Image x:Name="ButtonTempOpenFolder" HorizontalAlignment="Right" Height="30" VerticalAlignment="Bottom" Width="36" Source="Images/1CCC_OpenFolder_Normal.bmp" MouseEnter="ButtonTempOpenFolder_MouseEnter" MouseLeave="ButtonTempOpenFolder_MouseLeave" MouseDown="ButtonTempOpenFolder_MouseDown" ToolTip="Открыть папку с выбранной базой данных"/>
             </Grid>
         </Grid>
@@ -29,7 +29,7 @@
             <Image x:Name="LogicFlow_Site" HorizontalAlignment="Left" Width="90" Source="Images/LF_Logo_Horiz_Small_Edges.png" MouseDown="LabelLF_MouseDown" Cursor="Hand" Margin="22,6,0,6" Opacity="0.4" MouseLeave="LogicFlow_Site_MouseLeave" MouseEnter="LogicFlow_Site_MouseEnter" ToolTip="Перейти на сайт" Height="27"/>
 
 
-            <Label x:Name="AppVersion" Content="0.2.2508.1151" HorizontalAlignment="Left" Width="75" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
+            <Label x:Name="AppVersion" Content="0.2.510.845" HorizontalAlignment="Left" Width="75" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
             <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Right" Width="36" Margin="0,0,20,0" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
 
 

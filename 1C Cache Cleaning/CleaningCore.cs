@@ -114,7 +114,7 @@ namespace _1C_Cache_Cleaning
             TempSize = 0;
 
             // List of temp files extensions
-            List<string> TempExtensions = new List<string>() {"bin", "dat", "cfl", "log", "ind", "lck", "lgd", "1CL", "txt", "tmp", "lgf", "lgp"};
+            List<string> TempExtensions = new List<string>() {"bin", "dat", "cfl", "log", "ind", "lck", "lgd", "1CL", "txt", "tmp", "lgf", "lgp", "cgr"};
 
             string[] SplitedDBName = SelectedDBName.Split('/');
 

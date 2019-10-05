@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Logic Flow LLC.")]
 [assembly: AssemblyProduct("1C Cache Cleaning")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright © 2019")]
 [assembly: AssemblyTrademark("Logic Flow LLC.")]
 [assembly: AssemblyCulture("")]
 
@@ -49,5 +49,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.2508.1151")]
-[assembly: AssemblyFileVersion("0.2.2508.1151")]
+[assembly: AssemblyVersion("0.2.510.845")]
+[assembly: AssemblyFileVersion("0.2.510.845")]
