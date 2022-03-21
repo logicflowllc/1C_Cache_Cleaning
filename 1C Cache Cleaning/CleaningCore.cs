@@ -158,7 +158,7 @@ namespace _1C_Cache_Cleaning
                     MessageBox.Show("Путь к выбранной базе данных не найден", "Путь не найден", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-            } catch (Exception ex)
+            } catch (Exception)
             {
                 MessageBox.Show("Временные файлы всё ещё заняты.\n\nЕсли выбранная база данных расположена в общей папке, опубликована на WEB-сервере " +
                     "или к ней имеют доступ другие компьютеры, находящиеся в сети, Вам необходимо самостоятельно завершить " +

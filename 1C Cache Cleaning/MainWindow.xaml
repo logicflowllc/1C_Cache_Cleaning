@@ -1,16 +1,16 @@
-﻿<Window x:Name="MainWindow1" x:Class="_1C_Cache_Cleaning.MainWindow"
+﻿<Window x:Name="_1CCC_MainWindow" x:Class="_1C_Cache_Cleaning.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_1C_Cache_Cleaning"
         mc:Ignorable="d"
-        Title="Очистка 1С:Предприятие" Height="501" Width="939" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico" ScrollViewer.VerticalScrollBarVisibility="Disabled" MinWidth="939" MinHeight="501">
+        Title="Logic Flow / 1C Cache Cleaning" Height="525" Width="920" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico" ScrollViewer.VerticalScrollBarVisibility="Disabled" MinWidth="920" MinHeight="530">
     <Grid Background="#FF242427">
         <Grid x:Name="TempGrid" Margin="438,21,20,59" Background="#FF313136">
-            <Label VerticalAlignment="Top" x:Name="LabelTitleTemp" Content="Очистка временных файлов" Foreground="White" Background="#FF3B3B42" FontSize="16" Padding="15,8,5,5" Height="40"/>
+            <Label VerticalAlignment="Top" x:Name="LabelTitleTemp" Content="Очистка временных файлов" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,8,5,5" Height="40"/>
             <Label x:Name="LabelTempButtonTitle" Content="Агрессивная очистка" Margin="0,176,4,0" Foreground="#FFC79292" Padding="0,0,0,-3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="132" Height="20" VerticalAlignment="Top" Cursor="Help" ToolTip="Очситка всех временных файлов в папке выбранной базы данных"/>
-            <Image x:Name="buttonStartCleaningTemp" HorizontalAlignment="Right" Height="100" Margin="0,62,20,0" VerticalAlignment="Top" Width="100" Source="Images/1CCC_StartTempAgg_Normal.bmp" Stretch="Fill" MouseDown="ButtonStartCleaningTemp_MouseDown" MouseEnter="startButtonTempAgg_MouseEnter" MouseLeave="startButtonTempAgg_MouseLeave"/>
+            <Image x:Name="buttonStartCleaningTemp" HorizontalAlignment="Right" Height="100" Margin="0,62,20,0" VerticalAlignment="Top" Width="100" Source="Images/1CCC_StartTempAgg_Normal.bmp" Stretch="Fill" MouseDown="ButtonStartCleaningTemp_MouseDown" MouseEnter="startButtonTempAgg_MouseEnter" MouseLeave="startButtonTempAgg_MouseLeave" Cursor="Hand"/>
             <Grid Margin="20,62,21,15">
                 <ListBox x:Name="ListBoxDB" Margin="0,0,119,45" Background="#FF3B3B42" Foreground="White" BorderBrush="#FF3B3B42" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="ListBoxDB_SelectionChanged"/>
                 <Label x:Name="LabelTempDBPath" Content="" Foreground="White" Padding="10,6,10,0" Background="#FF3B3B42" Height="30" VerticalAlignment="Bottom" Margin="0,0,52,0" Cursor="Help" ToolTip="Путь выбранной базы данных"/>
@@ -18,21 +18,25 @@
             </Grid>
         </Grid>
         <Grid x:Name="CacheGrid" Margin="20,21,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="398" Height="213" VerticalAlignment="Top">
-            <Label VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="LabelTitleCache" Content="Очистка кэша 1С" Foreground="White" Background="#FF3B3B42" FontSize="16" Padding="15,8,5,5" Width="398" Height="40"/>
+            <Label VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="LabelTitleCache" Content="Очистка кэша 1С" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,8,5,5" Width="398" Height="40"/>
             <Label x:Name="LabelCacheButtonTitle" Content="Обычная очистка" HorizontalAlignment="Left" Margin="60,176,0,0" VerticalAlignment="Top" Foreground="#FFB7C9DA" Width="109" Padding="0,0,0,-3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="20" Background="{x:Null}" Cursor="Help" ToolTip="Простая очистка кэша"/>
             <Label x:Name="LabelCacheButtonAggTitle" Content="Агрессивная очистка" HorizontalAlignment="Left" Margin="211,176,0,0" VerticalAlignment="Top" Foreground="#FFC79292" Width="137" Padding="0,0,0,-3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="20" Cursor="Help" ToolTip="Очистка с принудительным закрытием всех сеансов 1С"/>
-            <Image x:Name="buttonStart" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="64,62,0,0" Source="Images/1CCC_Start_Normal.bmp" MouseEnter="startButton_MouseEnter" MouseLeave="startButton_MouseLeave" MouseDown="CacheCleaningButton_Click" Focusable="True"/>
-            <Image x:Name="buttonStartAggressive" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="229,62,0,0" Source="Images/1CCC_StartAgg_Normal.bmp" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave" MouseDown="CacheCleaningButtonAggressive_Click" Focusable="True"/>
+            <Image x:Name="buttonStart" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="64,62,0,0" Source="Images/1CCC_Start_Normal.bmp" MouseEnter="startButton_MouseEnter" MouseLeave="startButton_MouseLeave" MouseDown="CacheCleaningButton_Click" Focusable="True" Cursor="Hand"/>
+            <Image x:Name="buttonStartAggressive" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="229,62,0,0" Source="Images/1CCC_StartAgg_Normal.bmp" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave" MouseDown="CacheCleaningButtonAggressive_Click" Focusable="True" Cursor="Hand"/>
         </Grid>
-        <Label Content="Перед любыми действиями:&#xD;&#xA;1. Обязательно сохраните все открытые документы.&#xD;&#xA;2. Завершите все сеансы 1С.&#xD;&#xA;3. Убедитесь в наличии резервных копий баз данных.&#xD;&#xA;&#xD;&#xA;Очистка кэша и временных файлов работает только для&#xD;&#xA;локальных файловых баз данных." HorizontalAlignment="Left" Margin="20,254,0,0" Width="398" Foreground="White" Background="#FF313136" Padding="20,20,20,0" Height="149" VerticalAlignment="Top"/>
+        <Label Content="1. Обязательно сохраните все открытые документы.&#xA;2. Завершите все сеансы 1С.&#xA;3. Убедитесь в наличии резервных копий баз данных." HorizontalAlignment="Left" Margin="20,0,0,59" Width="398" Foreground="White" Background="#FF313136" Padding="20,8,20,0" Height="62" VerticalAlignment="Bottom" FontSize="11"/>
         <Grid x:Name="Bottom" Background="#FF313136" Height="39" VerticalAlignment="Bottom">
-            <Image x:Name="LogicFlow_Site" HorizontalAlignment="Left" Width="90" Source="Images/LF_Logo_Horiz_Small_Edges.png" MouseDown="LabelLF_MouseDown" Cursor="Hand" Margin="22,6,0,6" Opacity="0.4" MouseLeave="LogicFlow_Site_MouseLeave" MouseEnter="LogicFlow_Site_MouseEnter" ToolTip="Перейти на сайт" Height="27"/>
+            <Image x:Name="LogicFlow_Site" HorizontalAlignment="Left" Width="90" Source="Images/LF_Logo_Horiz_Small_Edges.png" MouseDown="LabelLF_MouseDown" Cursor="Hand" Margin="22,6,0,6" Opacity="0.4" MouseLeave="LogicFlow_Site_MouseLeave" MouseEnter="LogicFlow_Site_MouseEnter" ToolTip="Перейти на сайт logicflow.ru" Height="27"/>
 
 
-            <Label x:Name="AppVersion" Content="0.2.510.845" HorizontalAlignment="Left" Width="75" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
+            <Label x:Name="AppVersion" Content="0.22.2103.2230" HorizontalAlignment="Left" Width="75" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
             <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Right" Width="36" Margin="0,0,20,0" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
 
 
+        </Grid>
+        <Grid x:Name="ApacheGrid" Margin="20,252,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="179" Height="100" VerticalAlignment="Top">
+            <Label VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="LabelTitleApache" Content="Управление Apache" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,8,5,5" Width="179" Height="40"/>
+            <Image x:Name="buttonApache" HorizontalAlignment="Center" Height="30" Margin="0,55,0,0" VerticalAlignment="Top" Width="80" Stretch="Fill" StretchDirection="Both" Source="/1CCC_Apache_Wait.bmp" Cursor="Hand" MouseDown="ButtonApache_MouseDownAsync"/>
         </Grid>
 
 
