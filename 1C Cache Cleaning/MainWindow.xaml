@@ -29,7 +29,7 @@
             <Image x:Name="LogicFlow_Site" HorizontalAlignment="Left" Width="90" Source="Images/LF_Logo_Horiz_Small_Edges.png" MouseDown="LabelLF_MouseDown" Cursor="Hand" Margin="22,6,0,6" Opacity="0.4" MouseLeave="LogicFlow_Site_MouseLeave" MouseEnter="LogicFlow_Site_MouseEnter" ToolTip="Перейти на сайт logicflow.ru" Height="27"/>
 
 
-            <Label x:Name="AppVersion" Content="0.22.2103.2230" HorizontalAlignment="Left" Width="75" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
+            <Label x:Name="AppVersion" Content="0.22.2103.2350" HorizontalAlignment="Left" Width="75" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
             <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Right" Width="36" Margin="0,0,20,0" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
 
 

@@ -8,7 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.ServiceProcess;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Security.Principal;
+using System.ComponentModel;
+using System.Linq;
 
 namespace _1C_Cache_Cleaning
 {
@@ -26,6 +28,7 @@ namespace _1C_Cache_Cleaning
         // Apache current version name
         private ServiceController ApacheVerName;
 
+        bool isAdmin;
 
         public MainWindow()
         {
@@ -42,7 +45,6 @@ namespace _1C_Cache_Cleaning
 
             // Get Apache service status at MainForm startup
             GetApacheServiceState();
-
         }
 
         // Shutdown all 1C clients process
@@ -109,50 +111,79 @@ namespace _1C_Cache_Cleaning
                 case 0:
                     buttonApache.Source = new BitmapImage(new Uri(@"\Images\1CCC_Apache_Off.bmp", UriKind.Relative));
                     buttonApache.ToolTip = "Служба " + ApacheVerName.ServiceName.ToString() + " остановлена";
+                    buttonApache.IsEnabled = true;
                     break;
                 case 1:
                     buttonApache.Source = new BitmapImage(new Uri(@"\Images\1CCC_Apache_On.bmp", UriKind.Relative));
                     buttonApache.ToolTip = "Служба " + ApacheVerName.ServiceName.ToString() + " запущена";
+                    buttonApache.IsEnabled = true;
                     break;
                 case 2:
                     buttonApache.Source = new BitmapImage(new Uri(@"\Images\1CCC_Apache_Wait.bmp", UriKind.Relative));
                     buttonApache.ToolTip = "Служба " + ApacheVerName.ServiceName.ToString() + " в процессе запуска/остановки";
+                    buttonApache.IsEnabled = true;
                     break;
                 case 3:
                     buttonApache.Source = new BitmapImage(new Uri(@"\Images\1CCC_Apache_Wait.bmp", UriKind.Relative));
                     buttonApache.ToolTip = "Служба Apache не обнаружена";
-                    break;
-                default:
-                    buttonApache.Source = new BitmapImage(new Uri(@"\Images\1CCC_Apache_Wait.bmp", UriKind.Relative));
+                    buttonApache.IsEnabled = false;
                     break;
             }
         }
+
+
 
         /////////////////////////////////////////////////////////
         // Apache Start/Stop control
         private void ButtonApache_MouseDownAsync(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Check Apache service status
-            if (ApacheVerName.Status == ServiceControllerStatus.Running)
+            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
             {
-                // Go to service Stop
-                StartApacheStopSequence();
-                SetApacheState(2);
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+
+                // If is administrator, the variable updates from False to True
+                isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
-            else if (ApacheVerName.Status == ServiceControllerStatus.Stopped)
+
+            if (isAdmin)
             {
-                // Go to service Start
-                StartApacheStartSequence();
-                SetApacheState(2);
-            }
-            else
-            {
-                // Default 
-                MessageBox.Show(ApacheVerName.ServiceName.ToString() + " уже в процессе запуска/остановки. Повторите попытку через несколько секунд", ApacheVerName.ServiceName.ToString() + " уже запускается/останавливается ", MessageBoxButton.OK, MessageBoxImage.Warning);
+                // Check Apache service status
+                if (ApacheVerName.Status == ServiceControllerStatus.Running)
+                {
+                    // Go to service Stop
+                    StartApacheStopSequence();
+                    SetApacheState(2);
+                }
+                else if (ApacheVerName.Status == ServiceControllerStatus.Stopped)
+                {
+                    // Go to service Start
+                    StartApacheStartSequence();
+                    SetApacheState(2);
+                }
+                else
+                {
+                    // Default 
+                    MessageBox.Show(ApacheVerName.ServiceName.ToString() + " уже в процессе запуска/остановки. Повторите попытку через несколько секунд", ApacheVerName.ServiceName.ToString() + " уже запускается/останавливается ", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            } 
+            else {
+                string EXEFileName =new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+
+                System.Diagnostics.ProcessStartInfo startinfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = EXEFileName,
+                    UseShellExecute = true,
+                    Verb = "runas",
+                };
+
+                System.Diagnostics.Process.Start(startinfo);
+                System.Environment.Exit(0); 
+
             }
         }
 
         // Apache stop
+        
         private async Task StartApacheStopSequence()
         {
             await ApacheStopSequence();

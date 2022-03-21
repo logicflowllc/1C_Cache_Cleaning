@@ -152,5 +152,8 @@
     <Resource Include="Images\1CCC_Apache_On.bmp" />
     <Resource Include="Images\1CCC_Apache_Wait.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="System\Windows\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

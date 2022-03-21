@@ -27,6 +27,7 @@ namespace _1C_Cache_Cleaning
             // Define list of 1C cache directories 
             string[] AppDataSubFoldersNames = {
                 @"\1C\1cv8\",
+                @"\1C\1cv8\",
                 @"\1C\1cv8t\",
                 @"\1C\1Cv82\",
                 @"\1C\1Cv82t\",
@@ -64,7 +65,7 @@ namespace _1C_Cache_Cleaning
         }
 
         // Cleaning 
-        // Foreach all cache dirictories
+        // Foreach all cache directories
         private void CacheDirsDeleting(string[] TargetPaths)
         {
             // Foreach all subfolders
@@ -73,7 +74,7 @@ namespace _1C_Cache_Cleaning
                 string ReplacedString = CachePath.Replace(@"\\", @"\");
                 string[] CuttedString = ReplacedString.Split('\\');
 
-                // If dir name length = 26
+                // If dir name length = 36
                 if (CuttedString[CuttedString.Length - 1].Length == 36)
                 {
                     try
@@ -86,8 +87,9 @@ namespace _1C_Cache_Cleaning
                         {
                             FileInfo Info = new FileInfo(FileName);
                             TempCacheSize += Info.Length;
+                            File.SetAttributes(FileName, FileAttributes.Normal);
                         }
-
+                        
                         Directory.Delete(CachePath, true);
 
                         // in a case of error, current cache size will be deleted
@@ -95,7 +97,8 @@ namespace _1C_Cache_Cleaning
                     }
                     catch
                     {
-                        if (ErrorCount == 0) { 
+                        //MessageBox.Show(ex.ToString());
+                        if (ErrorCount != 0) { 
                             MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте:\n• запустить очистку в агрессивном режиме\n• завершить все процессы 1С через диспетчер задач\n• запустить очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         }
 
