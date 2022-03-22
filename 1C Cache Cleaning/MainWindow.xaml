@@ -5,38 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_1C_Cache_Cleaning"
         mc:Ignorable="d"
-        Title="Logic Flow / 1C Cache Cleaning" Height="525" Width="920" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico" ScrollViewer.VerticalScrollBarVisibility="Disabled" MinWidth="920" MinHeight="530">
+        Title="Logic Flow / 1C Cache Cleaning" Height="600" Width="920" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico" ScrollViewer.VerticalScrollBarVisibility="Disabled" MinWidth="920" MinHeight="600">
     <Grid Background="#FF242427">
-        <Grid x:Name="TempGrid" Margin="438,21,20,59" Background="#FF313136">
-            <Label VerticalAlignment="Top" x:Name="LabelTitleTemp" Content="Очистка временных файлов" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,8,5,5" Height="40"/>
-            <Label x:Name="LabelTempButtonTitle" Content="Агрессивная очистка" Margin="0,176,4,0" Foreground="#FFC79292" Padding="0,0,0,-3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="132" Height="20" VerticalAlignment="Top" Cursor="Help" ToolTip="Очситка всех временных файлов в папке выбранной базы данных"/>
-            <Image x:Name="buttonStartCleaningTemp" HorizontalAlignment="Right" Height="100" Margin="0,62,20,0" VerticalAlignment="Top" Width="100" Source="Images/1CCC_StartTempAgg_Normal.bmp" Stretch="Fill" MouseDown="ButtonStartCleaningTemp_MouseDown" MouseEnter="startButtonTempAgg_MouseEnter" MouseLeave="startButtonTempAgg_MouseLeave" Cursor="Hand"/>
+        <Grid x:Name="CacheGrid" Margin="20,21,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="398" Height="223" VerticalAlignment="Top" MouseEnter="CacheGrid_MouseEnter" MouseLeave="CacheGrid_MouseLeave" d:IsLocked="True">
+            <Grid x:Name="CacheTitle" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Label VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="LabelTitleCache" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,11,5,5" Width="398" Height="40" FontFamily="Gotham Pro Medium" Content="Очистка кэша"/>
+                <Image x:Name="BtnCacheUpdate" Source="/Images/1CCC_UpdateCache_Normal.png" Margin="358,0,0,183" Width="40" Height="40" Stretch="Fill" MouseDown="BtnCacheUpdate_MouseDown" MouseEnter="BtnCacheUpdate_MouseEnter" MouseLeave="BtnCacheUpdate_MouseLeave" ToolTip="Пересчитать размер кэша" Cursor="Hand"/>
+            </Grid>
+            <Grid x:Name="BtnStartStdClean" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="CacheCleaningButton_Click" MouseEnter="startButton_MouseEnter" MouseLeave="startButton_MouseLeave" Margin="25,62,0,0">
+                <Image x:Name="buttonStartStd" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="/Images/1CCC_Start_Normal.png" Focusable="True" Cursor="Hand"/>
+                <Grid HorizontalAlignment="Left" Height="23" Margin="0,77,0,0" VerticalAlignment="Top" Cursor="Hand">
+                    <TextBlock HorizontalAlignment="Center" Margin="0,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="12" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Medium" FontSize="9" Foreground="White" Text="ОЧИСТКА КЭША"/>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="11" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Black" Foreground="White" Text="ОБЫЧНАЯ" FontSize="11" Margin="0,-3,0,0" Cursor=""/>
+                </Grid>
+                <TextBlock x:Name="LabStdCount" HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontFamily="Gotham Pro" Text="2.5Gb" Padding="4,1,4,1" Margin="-13,7,0,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid x:Name="BtnStartAggrClean" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" MouseDown="CacheCleaningButtonAggressive_Click" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave">
+                <Image x:Name="buttonStartAggressive" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="/Images/1CCC_StartAgg_Normal.png" Focusable="True" Cursor="Hand"/>
+                <Grid HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Cursor="Hand" Margin="0,77,0,0">
+                    <TextBlock HorizontalAlignment="Center" Margin="0,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="12" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Medium" FontSize="9" Foreground="White" Text="ОЧИСТКА КЭША"/>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="11" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Black" Foreground="White" FontSize="11" Margin="0,-3,0,0" Cursor=""><Run Language="ru-ru" Text="АГРЕССИВНАЯ"/></TextBlock>
+                </Grid>
+                <TextBlock x:Name="LabAggrCount" HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontFamily="Gotham Pro" Text="2.5Gb" Padding="4,1,4,1" Margin="-13,7,0,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid x:Name="BtnStartMonsterClean" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="274,0,0,0" MouseEnter="buttonStartMonster_MouseEnter" MouseLeave="buttonStartMonster_MouseLeave" MouseDown="CacheCleaningButtonMonster_Click">
+                <Image x:Name="buttonStartMonster" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="/Images/1CCC_StartMon_Normal.png" Focusable="True" Cursor="Hand"/>
+                <Grid HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Cursor="Hand" Margin="0,77,0,0">
+                    <TextBlock HorizontalAlignment="Center" Margin="0,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="12" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Medium" FontSize="9" Foreground="White" Text="ОЧИСТКА КЭША"/>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="11" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Black" Foreground="White" FontSize="10.5" Margin="0,-3,0,0" Cursor=""><Run Language="ru-ru" Text="МОНСТРУОЗНАЯ"/></TextBlock>
+                </Grid>
+            </Grid>
+            <TextBlock x:Name="ButLabStdClean" HorizontalAlignment="Left" Margin="25,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="100" Foreground="White" FontSize="11" TextAlignment="Center" FontFamily="Gotham Pro Light"><Run Text="Обычная очистка"/><LineBreak/><Run Text="без закрытия "/><LineBreak/><Run Text="сеансов 1С"/></TextBlock>
+            <TextBlock x:Name="ButLabAggrClean" HorizontalAlignment="Center" Margin="0,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="100" Foreground="White" FontSize="11" TextAlignment="Center" FontFamily="Gotham Pro Light"><Run Language="ru-ru" Text="Очистка с завершением всех сеансов 1С"/></TextBlock>
+            <TextBlock x:Name="ButLabMonsClean" HorizontalAlignment="Left" Margin="273,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="100" Foreground="White" FontSize="11" TextAlignment="Center" FontFamily="Gotham Pro Light"><Run Language="ru-ru" Text="Очистка кэша у всех пользователей "/></TextBlock>
+        </Grid>
+        <Grid x:Name="ApacheGrid" Margin="20,263,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="190" Height="100" VerticalAlignment="Top" MouseEnter="ApacheGrid_MouseEnter" MouseLeave="ApacheGrid_MouseLeave" d:IsLocked="True">
+            <Label VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="LabelTitleApache" Content="Управление Apache" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,12,5,5" Width="190" Height="40" FontFamily="Gotham Pro Medium" ScrollViewer.CanContentScroll="True"/>
+            <Image x:Name="buttonApache" HorizontalAlignment="Left" Height="30" Margin="52,54,0,0" VerticalAlignment="Top" Width="80" Stretch="Fill" StretchDirection="Both" Source="/Images/1CCC_Apache_Wait.png" Cursor="Hand" MouseDown="ButtonApache_MouseDownAsync"/>
+        </Grid>
+        <Grid x:Name="UpdatesGrid" Margin="228,263,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="190" Height="100" VerticalAlignment="Top" MouseEnter="UpdatesGrid_MouseEnter" MouseLeave="UpdatesGrid_MouseLeave">
+            <Label VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="LabelTitleUpdates" Content="Очистка обновлений" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,12,5,5" Width="190" Height="40" FontFamily="Gotham Pro Medium" ScrollViewer.CanContentScroll="True"/>
+            <Image x:Name="buttonUpdates" HorizontalAlignment="Left" Height="30" Margin="52,54,0,0" VerticalAlignment="Top" Width="80" Stretch="Fill" StretchDirection="Both" Cursor="Hand" MouseDown="ButtonApache_MouseDownAsync"/>
+        </Grid>
+        <Grid x:Name="TempGrid" Margin="438,21,20,59" Background="#FF313136" MouseEnter="TempGrid_MouseEnter" MouseLeave="TempGrid_MouseLeave" d:IsLocked="True">
+            <Label VerticalAlignment="Top" x:Name="LabelTitleTemp" Content="Очистка временных файлов" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,11,5,5" Height="40" FontFamily="Gotham Pro Medium"/>
             <Grid Margin="20,62,21,15">
                 <ListBox x:Name="ListBoxDB" Margin="0,0,119,45" Background="#FF3B3B42" Foreground="White" BorderBrush="#FF3B3B42" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="ListBoxDB_SelectionChanged"/>
-                <Label x:Name="LabelTempDBPath" Content="" Foreground="White" Padding="10,6,10,0" Background="#FF3B3B42" Height="30" VerticalAlignment="Bottom" Margin="0,0,52,0" Cursor="Help" ToolTip="Путь выбранной базы данных"/>
-                <Image x:Name="ButtonTempOpenFolder" HorizontalAlignment="Right" Height="30" VerticalAlignment="Bottom" Width="36" Source="Images/1CCC_OpenFolder_Normal.bmp" MouseEnter="ButtonTempOpenFolder_MouseEnter" MouseLeave="ButtonTempOpenFolder_MouseLeave" MouseDown="ButtonTempOpenFolder_MouseDown" ToolTip="Открыть папку с выбранной базой данных"/>
+                <Label x:Name="LabelTempDBPath" Content="" Foreground="White" Padding="10,6,10,0" Background="#FF3B3B42" Height="30" VerticalAlignment="Bottom" Margin="0,0,52,0" ToolTip="Путь выбранной базы данных"/>
+                <Image x:Name="ButtonTempOpenFolder" HorizontalAlignment="Right" Height="30" VerticalAlignment="Bottom" Width="36" Source="/Images/1CCC_OpenFolder_Normal.png" MouseEnter="ButtonTempOpenFolder_MouseEnter" MouseLeave="ButtonTempOpenFolder_MouseLeave" MouseDown="ButtonTempOpenFolder_MouseDown" ToolTip="Открыть папку с выбранной базой данных" Cursor="Hand"/>
             </Grid>
+            <Grid x:Name="BtnStartTempClean" Margin="0,63,19,0" MouseEnter="startButtonTempAgg_MouseEnter" MouseLeave="startButtonTempAgg_MouseLeave" MouseDown="TempCleaningButtonAggressive_Click" HorizontalAlignment="Right" Width="100" Height="100" VerticalAlignment="Top">
+                <Image x:Name="buttonStartCleaningTemp" HorizontalAlignment="Right" Height="100" VerticalAlignment="Center" Width="100" Source="/Images/1CCC_StartTempAgg_Normal.png" Stretch="Fill" Cursor="Hand"/>
+                <Grid HorizontalAlignment="Center" Height="23" VerticalAlignment="Top" Cursor="Hand" Margin="0,76,0,0" MouseEnter="startButtonTempAgg_MouseEnter">
+                    <TextBlock HorizontalAlignment="Center" Margin="0,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="12" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Medium" FontSize="9" Foreground="White" Text="ОЧИСТКА ФАЙЛОВ"/>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="11" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Black" Foreground="White" FontSize="11" Margin="0,-3,0,0" Cursor="" Text="АГРЕССИВНАЯ"/>
+                </Grid>
+            </Grid>
+            <TextBlock x:Name="ButLabTempClean" Margin="0,174,19,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="89" Foreground="White" FontSize="11" TextAlignment="Center" FontFamily="Gotham Pro Light" Text="Очистка временных файлов, находящихся в одной папке с файлом базы данных 1С" HorizontalAlignment="Right" Width="100"/>
         </Grid>
-        <Grid x:Name="CacheGrid" Margin="20,21,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="398" Height="213" VerticalAlignment="Top">
-            <Label VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="LabelTitleCache" Content="Очистка кэша 1С" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,8,5,5" Width="398" Height="40"/>
-            <Label x:Name="LabelCacheButtonTitle" Content="Обычная очистка" HorizontalAlignment="Left" Margin="60,176,0,0" VerticalAlignment="Top" Foreground="#FFB7C9DA" Width="109" Padding="0,0,0,-3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="20" Background="{x:Null}" Cursor="Help" ToolTip="Простая очистка кэша"/>
-            <Label x:Name="LabelCacheButtonAggTitle" Content="Агрессивная очистка" HorizontalAlignment="Left" Margin="211,176,0,0" VerticalAlignment="Top" Foreground="#FFC79292" Width="137" Padding="0,0,0,-3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="20" Cursor="Help" ToolTip="Очистка с принудительным закрытием всех сеансов 1С"/>
-            <Image x:Name="buttonStart" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="64,62,0,0" Source="Images/1CCC_Start_Normal.bmp" MouseEnter="startButton_MouseEnter" MouseLeave="startButton_MouseLeave" MouseDown="CacheCleaningButton_Click" Focusable="True" Cursor="Hand"/>
-            <Image x:Name="buttonStartAggressive" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="229,62,0,0" Source="Images/1CCC_StartAgg_Normal.bmp" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave" MouseDown="CacheCleaningButtonAggressive_Click" Focusable="True" Cursor="Hand"/>
-        </Grid>
-        <Label Content="1. Обязательно сохраните все открытые документы.&#xA;2. Завершите все сеансы 1С.&#xA;3. Убедитесь в наличии резервных копий баз данных." HorizontalAlignment="Left" Margin="20,0,0,59" Width="398" Foreground="White" Background="#FF313136" Padding="20,8,20,0" Height="62" VerticalAlignment="Bottom" FontSize="11"/>
-        <Grid x:Name="Bottom" Background="#FF313136" Height="39" VerticalAlignment="Bottom">
+        <Label x:Name="WarningText" Content="1. Обязательно сохраните все открытые документы.&#xA;2. Завершите все сеансы 1С.&#xA;3. Убедитесь в наличии резервных копий баз данных." HorizontalAlignment="Left" Margin="20,0,0,59" Width="398" Foreground="White" Background="#FF6D3A3A" Padding="20,8,20,0" Height="53" VerticalAlignment="Bottom" FontSize="11" FontFamily="Gotham Pro" d:IsLocked="True"/>
+        <Grid x:Name="Bottom" Background="#FF313136" Height="39" VerticalAlignment="Bottom" d:IsLocked="True">
             <Image x:Name="LogicFlow_Site" HorizontalAlignment="Left" Width="90" Source="Images/LF_Logo_Horiz_Small_Edges.png" MouseDown="LabelLF_MouseDown" Cursor="Hand" Margin="22,6,0,6" Opacity="0.4" MouseLeave="LogicFlow_Site_MouseLeave" MouseEnter="LogicFlow_Site_MouseEnter" ToolTip="Перейти на сайт logicflow.ru" Height="27"/>
 
 
-            <Label x:Name="AppVersion" Content="0.22.2103.2350" HorizontalAlignment="Left" Width="75" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
-            <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Right" Width="36" Margin="0,0,20,0" Padding="0,11,0,0" Foreground="#FF676774" FontSize="11" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave"/>
+            <Label x:Name="AppVersion" Content="0.22.2203.1545" HorizontalAlignment="Left" Width="88" Padding="0,13,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave" FontFamily="Gotham Pro"/>
+            <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Left" Width="76" Margin="824,0,0,0" Padding="0,13,0,0" Foreground="#FF676774" FontSize="11" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave" FontFamily="Gotham Pro"/>
 
 
-        </Grid>
-        <Grid x:Name="ApacheGrid" Margin="20,252,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="179" Height="100" VerticalAlignment="Top">
-            <Label VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="LabelTitleApache" Content="Управление Apache" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,8,5,5" Width="179" Height="40"/>
-            <Image x:Name="buttonApache" HorizontalAlignment="Center" Height="30" Margin="0,55,0,0" VerticalAlignment="Top" Width="80" Stretch="Fill" StretchDirection="Both" Source="/1CCC_Apache_Wait.bmp" Cursor="Hand" MouseDown="ButtonApache_MouseDownAsync"/>
         </Grid>
 
 

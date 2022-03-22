@@ -127,33 +127,29 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\1CCC_StartAgg_Hover.bmp" />
-    <Resource Include="Images\1CCC_StartAgg_Normal.bmp" />
-    <Resource Include="Images\1CCC_Start_Hover.bmp" />
-    <Resource Include="Images\1CCC_Start_Normal.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1CCC_StartTempAgg_Normal.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1CCC_StartTempAgg_Hover.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\LF_Logo_Horiz_Small_Edges.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\1CCC_OpenFolder_Normal.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1CCC_OpenFolder_Hover.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1CCC_Apache_Off.bmp" />
-    <Resource Include="Images\1CCC_Apache_On.bmp" />
-    <Resource Include="Images\1CCC_Apache_Wait.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="System\Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1CCC_UpdateCache_Hover.png" />
+    <Resource Include="Images\1CCC_UpdateCache_Normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1CCC_Apache_Off.png" />
+    <Resource Include="Images\1CCC_Apache_On.png" />
+    <Resource Include="Images\1CCC_Apache_Wait.png" />
+    <Resource Include="Images\1CCC_OpenFolder_Hover.png" />
+    <Resource Include="Images\1CCC_OpenFolder_Normal.png" />
+    <Resource Include="Images\1CCC_StartAgg_Hover.png" />
+    <Resource Include="Images\1CCC_StartAgg_Normal.png" />
+    <Resource Include="Images\1CCC_StartMon_Hover.png" />
+    <Resource Include="Images\1CCC_StartMon_Normal.png" />
+    <Resource Include="Images\1CCC_StartTempAgg_Hover.png" />
+    <Resource Include="Images\1CCC_StartTempAgg_Normal.png" />
+    <Resource Include="Images\1CCC_Start_Hover.png" />
+    <Resource Include="Images\1CCC_Start_Normal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

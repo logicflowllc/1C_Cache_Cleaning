@@ -13,10 +13,9 @@ namespace _1C_Cache_Cleaning
         private double TempSize = 0L;
         private byte ErrorCount = 0;
 
-
         // Start of cache cleaning
         // Find all cache directories and clean it
-        public void StartCacheCleaning()
+        public string CacheCleaning(bool ConfirmClean)
         {
             CacheSize = 0;
 
@@ -26,7 +25,6 @@ namespace _1C_Cache_Cleaning
 
             // Define list of 1C cache directories 
             string[] AppDataSubFoldersNames = {
-                @"\1C\1cv8\",
                 @"\1C\1cv8\",
                 @"\1C\1cv8t\",
                 @"\1C\1Cv82\",
@@ -40,7 +38,7 @@ namespace _1C_Cache_Cleaning
                 if (Directory.Exists(AppDataLocalGlobal + CurrentLocalPath))
                 {
                     string[] LocalSubDirs = Directory.GetDirectories(AppDataLocalGlobal + CurrentLocalPath, "*", SearchOption.TopDirectoryOnly);
-                    CacheDirsDeleting(LocalSubDirs);
+                    CacheDirsDeleting(LocalSubDirs, ConfirmClean);
                 }
             }
 
@@ -50,7 +48,7 @@ namespace _1C_Cache_Cleaning
                 if (Directory.Exists(AppDataRoamingGlobal + CurrentLocalPath))
                 {
                     string[] LocalSubDirs = Directory.GetDirectories(AppDataRoamingGlobal + CurrentLocalPath, "*", SearchOption.TopDirectoryOnly);
-                    CacheDirsDeleting(LocalSubDirs);
+                    CacheDirsDeleting(LocalSubDirs, ConfirmClean);
                 }
             }
 
@@ -58,15 +56,20 @@ namespace _1C_Cache_Cleaning
             StringBuilder sb = new StringBuilder();
             sb.Append("Очистка кэша 1С завершена.\n\n");
             sb.Append("Очищено ");
-            sb.Append(ConvertSize(CacheSize));
+            string CacheSizeConverted = ConvertSize(CacheSize);
+            sb.Append(CacheSizeConverted);
 
-            MessageBox.Show(sb.ToString(), "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (ConfirmClean)
+            {
+                MessageBox.Show(sb.ToString(), "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
 
+            return CacheSizeConverted;
         }
 
         // Cleaning 
         // Foreach all cache directories
-        private void CacheDirsDeleting(string[] TargetPaths)
+        private void CacheDirsDeleting(string[] TargetPaths, bool ConfirmClean)
         {
             // Foreach all subfolders
             foreach (string CachePath in TargetPaths)
@@ -85,12 +88,15 @@ namespace _1C_Cache_Cleaning
 
                         foreach (string FileName in AllCacheFiles)
                         {
-                            FileInfo Info = new FileInfo(FileName);
-                            TempCacheSize += Info.Length;
                             File.SetAttributes(FileName, FileAttributes.Normal);
+                            FileInfo Info = new FileInfo(FileName);                            
+                            TempCacheSize += Info.Length;                            
                         }
-                        
-                        Directory.Delete(CachePath, true);
+
+                        if (ConfirmClean)
+                        {
+                            Directory.Delete(CachePath, true);
+                        }
 
                         // in a case of error, current cache size will be deleted
                         CacheSize += TempCacheSize;
@@ -175,25 +181,25 @@ namespace _1C_Cache_Cleaning
             if ((CurrentSize > (1024 * 1024 * 1024)))
             {
                 double temp = Convert.ToDouble(CurrentSize) / (1024 * 1024 * 1024);
-                return temp.ToString("0.00") + " GB";
+                return temp.ToString("0.00") + "Gb";
             }
             else if ((CurrentSize < (1024 * 1024 * 1024)) && (CurrentSize > (1024 * 1024)))
             {
                 double temp = Convert.ToDouble(CurrentSize) / (1024 * 1024);
-                return temp.ToString("0.00") + " MB";
+                return temp.ToString("0.00") + "Mb";
             }
             else if (CurrentSize < 1024 * 1024 && CurrentSize > 1024)
             {
                 double temp = Convert.ToDouble(CurrentSize) / (1024);
-                return temp.ToString("0.00") + " KB";
+                return temp.ToString("0.00") + "Kb";
             }
             else if (CurrentSize < 1024 && CurrentSize > 0)
             {
-                return CurrentSize.ToString() + " B";
+                return CurrentSize.ToString() + "b";
             }
             else
             {
-                return "0 B";
+                return "0b";
             }
         }
     }
