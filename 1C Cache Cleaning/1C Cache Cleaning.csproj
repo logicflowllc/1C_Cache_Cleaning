@@ -151,5 +151,9 @@
     <Resource Include="Images\1CCC_Start_Hover.png" />
     <Resource Include="Images\1CCC_Start_Normal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1CCC_Update_Hover.png" />
+    <Resource Include="Images\1CCC_Update_Normal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

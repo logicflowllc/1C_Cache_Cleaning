@@ -21,7 +21,8 @@ namespace _1C_Cache_Cleaning
         private SortedDictionary<string, string> DBList; // List of databases and paths
         private ServiceController ApacheVerName; // Apache current version name
         bool isAdmin; // Admin flag        
-        string cacheSize; // CacheSize
+        string cacheSize; // Cache Size
+        string updatesSize; // Uppdates Size
 
         Color blockHeaderNormal = Color.FromArgb(0xFF, 0x3B, 0x3B, 0x42);
         Color blockHeaderHover = Color.FromArgb(0xFF, 0x58, 0x58, 0x61);
@@ -47,12 +48,15 @@ namespace _1C_Cache_Cleaning
 
             // Count cache size async
             CountCacheSize();
+
+            // Count updates size
+            CountUpdateSize();
         }
 
         #region Cache_Size
         /////////////////////////////////////////////////////////
         // Cache size preloading
-        private async Task CountCacheSize()
+        private async Task CountCacheSize ()
         {
             await CountCacheSizeAsync();
             if (cacheSize == "0b")
@@ -66,7 +70,7 @@ namespace _1C_Cache_Cleaning
                 LabAggrCount.Background = new SolidColorBrush(Color.FromArgb(150, 255, 89, 89));
             }
             LabStdCount.Text = cacheSize;
-            LabAggrCount.Text = cacheSize + "<";
+            LabAggrCount.Text = cacheSize;
         }
 
         async Task CountCacheSizeAsync()
@@ -79,6 +83,35 @@ namespace _1C_Cache_Cleaning
             CleaningCore cc = new CleaningCore();
             cacheSize = cc.CacheCleaning(false);   
         }
+        #endregion
+
+        #region Updates_Size
+        // Updates size
+        private async Task CountUpdateSize()
+        {
+            await CountUpdateSizeAsync();
+            if (updatesSize == "0b")
+            {
+                LabUpdCount.Background = new SolidColorBrush(Color.FromArgb(150, 0, 123, 255));
+            }
+            else
+            {
+                LabUpdCount.Background = new SolidColorBrush(Color.FromArgb(150, 255, 89, 89));
+            }
+            LabUpdCount.Text = updatesSize;
+        }
+
+        async Task CountUpdateSizeAsync()
+        {
+            await Task.Run(() => CountUpdates());
+        }
+
+        void CountUpdates()
+        {
+            CleaningCore cc = new CleaningCore();
+            updatesSize = cc.UpdatesCleaning(false);
+        }
+
         #endregion
 
         #region Standart_Cache_Cleaning
@@ -161,6 +194,31 @@ namespace _1C_Cache_Cleaning
         }
         #endregion
 
+        #region Updates_Cleaning
+        private void buttonUpdates_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            string MessageBoxText = "Все обновления конфигурация, патчи и \nустановочные файлы платформ из папок %AppData%\n и %LocalAppData% будут удалены.\n\nПродолжить?";
+            string Caption = "Очистка файлов обновлений";
+
+            MessageBoxButton MessageBoxButtons = MessageBoxButton.YesNo;
+            MessageBoxImage MessageBoxIcons = MessageBoxImage.Warning;
+
+            MessageBoxResult MessageBoxPressed = MessageBox.Show(MessageBoxText, Caption, MessageBoxButtons, MessageBoxIcons);
+
+            switch (MessageBoxPressed)
+            {
+                case MessageBoxResult.Yes:
+                    CleaningCore cc = new CleaningCore();
+                    updatesSize = cc.UpdatesCleaning(true);
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+            // Count updates size
+            CountUpdateSize();
+        }
+        #endregion
+
         #region Temp_Files_Cleaning
         /////////////////////////////////////////////////////////
         // Send DB path to Cleaning Core
@@ -236,9 +294,11 @@ namespace _1C_Cache_Cleaning
 
         /////////////////////////////////////////////////////////
         // Update cache button down
+        // !!! UPDATE BOTH CACHE AND UPDATES SIZES !!!
         private void BtnCacheUpdate_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             CountCacheSize();
+            CountUpdateSize();
         }
 
         // Update cache button hover
@@ -404,6 +464,23 @@ namespace _1C_Cache_Cleaning
         {
             LabelTitleUpdates.Background = new SolidColorBrush(blockHeaderNormal);
             UpdatesGrid.Background = new SolidColorBrush(blockBodyNormal);
+        }
+
+        // Mouse hover 
+        private void buttonUpdates_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (mouseCount == 0)
+            {
+                buttonUpdates.Source = new BitmapImage(new Uri(@"\Images\1CCC_Update_Hover.png", UriKind.Relative));
+                mouseCount += 1;
+            }
+        }
+
+        // Mouse leave
+        private void buttonUpdates_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            buttonUpdates.Source = new BitmapImage(new Uri(@"\Images\1CCC_Update_Normal.png", UriKind.Relative));
+            mouseCount = 0;
         }
         #endregion
 
@@ -624,6 +701,7 @@ namespace _1C_Cache_Cleaning
             ApacheVerName.Start();
             ApacheVerName.WaitForStatus(ServiceControllerStatus.Running);
         }
+
         #endregion
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Logic Flow / 1C Cache Cleaning" Height="600" Width="920" WindowStartupLocation="CenterScreen" Icon="1CCC_Rocket.ico" ScrollViewer.VerticalScrollBarVisibility="Disabled" MinWidth="920" MinHeight="600">
     <Grid Background="#FF242427">
-        <Grid x:Name="CacheGrid" Margin="20,21,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="398" Height="223" VerticalAlignment="Top" MouseEnter="CacheGrid_MouseEnter" MouseLeave="CacheGrid_MouseLeave" d:IsLocked="True">
+        <Grid x:Name="CacheGrid" Margin="20,21,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="398" Height="223" VerticalAlignment="Top" MouseEnter="CacheGrid_MouseEnter" MouseLeave="CacheGrid_MouseLeave">
             <Grid x:Name="CacheTitle" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Label VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="LabelTitleCache" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,11,5,5" Width="398" Height="40" FontFamily="Gotham Pro Medium" Content="Очистка кэша"/>
                 <Image x:Name="BtnCacheUpdate" Source="/Images/1CCC_UpdateCache_Normal.png" Margin="358,0,0,183" Width="40" Height="40" Stretch="Fill" MouseDown="BtnCacheUpdate_MouseDown" MouseEnter="BtnCacheUpdate_MouseEnter" MouseLeave="BtnCacheUpdate_MouseLeave" ToolTip="Пересчитать размер кэша" Cursor="Hand"/>
@@ -18,7 +18,7 @@
                     <TextBlock HorizontalAlignment="Center" Margin="0,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="12" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Medium" FontSize="9" Foreground="White" Text="ОЧИСТКА КЭША"/>
                     <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="11" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Black" Foreground="White" Text="ОБЫЧНАЯ" FontSize="11" Margin="0,-3,0,0" Cursor=""/>
                 </Grid>
-                <TextBlock x:Name="LabStdCount" HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontFamily="Gotham Pro" Text="2.5Gb" Padding="4,1,4,1" Margin="-13,7,0,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="LabStdCount" HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontFamily="Gotham Pro" Padding="4,1,4,1" Margin="-14,7,0,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid x:Name="BtnStartAggrClean" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" MouseDown="CacheCleaningButtonAggressive_Click" MouseEnter="startButtonAgg_MouseEnter" MouseLeave="startButtonAgg_MouseLeave">
                 <Image x:Name="buttonStartAggressive" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="/Images/1CCC_StartAgg_Normal.png" Focusable="True" Cursor="Hand"/>
@@ -26,7 +26,7 @@
                     <TextBlock HorizontalAlignment="Center" Margin="0,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="12" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Medium" FontSize="9" Foreground="White" Text="ОЧИСТКА КЭША"/>
                     <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="11" Width="100" TextAlignment="Center" FontFamily="Gotham Pro Black" Foreground="White" FontSize="11" Margin="0,-3,0,0" Cursor=""><Run Language="ru-ru" Text="АГРЕССИВНАЯ"/></TextBlock>
                 </Grid>
-                <TextBlock x:Name="LabAggrCount" HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontFamily="Gotham Pro" Text="2.5Gb" Padding="4,1,4,1" Margin="-13,7,0,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="LabAggrCount" HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontFamily="Gotham Pro" Padding="4,1,4,1" Margin="-13,7,0,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid x:Name="BtnStartMonsterClean" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="274,0,0,0" MouseEnter="buttonStartMonster_MouseEnter" MouseLeave="buttonStartMonster_MouseLeave" MouseDown="CacheCleaningButtonMonster_Click">
                 <Image x:Name="buttonStartMonster" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="/Images/1CCC_StartMon_Normal.png" Focusable="True" Cursor="Hand"/>
@@ -45,7 +45,8 @@
         </Grid>
         <Grid x:Name="UpdatesGrid" Margin="228,263,0,0" Background="#FF313136" HorizontalAlignment="Left" Width="190" Height="100" VerticalAlignment="Top" MouseEnter="UpdatesGrid_MouseEnter" MouseLeave="UpdatesGrid_MouseLeave">
             <Label VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="LabelTitleUpdates" Content="Очистка обновлений" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,12,5,5" Width="190" Height="40" FontFamily="Gotham Pro Medium" ScrollViewer.CanContentScroll="True"/>
-            <Image x:Name="buttonUpdates" HorizontalAlignment="Left" Height="30" Margin="52,54,0,0" VerticalAlignment="Top" Width="80" Stretch="Fill" StretchDirection="Both" Cursor="Hand" MouseDown="ButtonApache_MouseDownAsync"/>
+            <Image x:Name="buttonUpdates" HorizontalAlignment="Left" Height="30" Margin="52,54,0,0" VerticalAlignment="Top" Width="80" Stretch="Fill" StretchDirection="Both" Cursor="Hand" MouseDown="buttonUpdates_MouseDown" Source="/Images/1CCC_Update_Normal.png" MouseEnter="buttonUpdates_MouseEnter" MouseLeave="buttonUpdates_MouseLeave"/>
+            <TextBlock x:Name="LabUpdCount" HorizontalAlignment="Left" TextWrapping="Wrap" Foreground="White" FontFamily="Gotham Pro" Padding="4,1,4,1" Margin="35,58,0,0" VerticalAlignment="Top"/>
         </Grid>
         <Grid x:Name="TempGrid" Margin="438,21,20,59" Background="#FF313136" MouseEnter="TempGrid_MouseEnter" MouseLeave="TempGrid_MouseLeave" d:IsLocked="True">
             <Label VerticalAlignment="Top" x:Name="LabelTitleTemp" Content="Очистка временных файлов" Foreground="White" Background="#FF3B3B42" FontSize="14" Padding="15,11,5,5" Height="40" FontFamily="Gotham Pro Medium"/>
@@ -64,12 +65,12 @@
             <TextBlock x:Name="ButLabTempClean" Margin="0,174,19,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="89" Foreground="White" FontSize="11" TextAlignment="Center" FontFamily="Gotham Pro Light" Text="Очистка временных файлов, находящихся в одной папке с файлом базы данных 1С" HorizontalAlignment="Right" Width="100"/>
         </Grid>
         <Label x:Name="WarningText" Content="1. Обязательно сохраните все открытые документы.&#xA;2. Завершите все сеансы 1С.&#xA;3. Убедитесь в наличии резервных копий баз данных." HorizontalAlignment="Left" Margin="20,0,0,59" Width="398" Foreground="White" Background="#FF6D3A3A" Padding="20,8,20,0" Height="53" VerticalAlignment="Bottom" FontSize="11" FontFamily="Gotham Pro" d:IsLocked="True"/>
-        <Grid x:Name="Bottom" Background="#FF313136" Height="39" VerticalAlignment="Bottom" d:IsLocked="True">
+        <Grid x:Name="Bottom" Background="#FF313136" Height="39" VerticalAlignment="Bottom">
             <Image x:Name="LogicFlow_Site" HorizontalAlignment="Left" Width="90" Source="Images/LF_Logo_Horiz_Small_Edges.png" MouseDown="LabelLF_MouseDown" Cursor="Hand" Margin="22,6,0,6" Opacity="0.4" MouseLeave="LogicFlow_Site_MouseLeave" MouseEnter="LogicFlow_Site_MouseEnter" ToolTip="Перейти на сайт logicflow.ru" Height="27"/>
 
 
-            <Label x:Name="AppVersion" Content="0.22.2203.1545" HorizontalAlignment="Left" Width="88" Padding="0,13,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave" FontFamily="Gotham Pro"/>
-            <Label x:Name="GitHubLink" Content="GitHub" HorizontalAlignment="Left" Width="76" Margin="824,0,0,0" Padding="0,13,0,0" Foreground="#FF676774" FontSize="11" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave" FontFamily="Gotham Pro"/>
+            <Label x:Name="AppVersion" Content="0.22.2203.2215" HorizontalAlignment="Left" Width="88" Padding="0,13,0,0" Foreground="#FF676774" FontSize="11" Cursor="Hand" MouseDown="LabelGitHubReleases_MouseDown" Margin="124,0,0,0" ToolTip="Посмотреть релизы на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave" FontFamily="Gotham Pro"/>
+            <Label x:Name="GitHubLink" Content="GitHub" Margin="824,0,20,0" Padding="0,13,0,0" Foreground="#FF676774" FontSize="11" HorizontalContentAlignment="Right" MouseDown="LabelGitHub_MouseDown" Cursor="Hand" ToolTip="Посмотреть репозиторий на GitHub" MouseEnter="BottomTitles_MouseEnter" MouseLeave="BottomTitles_MouseLeave" FontFamily="Gotham Pro"/>
 
 
         </Grid>

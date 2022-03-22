@@ -11,8 +11,11 @@ namespace _1C_Cache_Cleaning
         // Counter of cache size
         private double CacheSize = 0L;
         private double TempSize = 0L;
-        private byte ErrorCount = 0;
+        private double UpdatesSize = 0L;
+        private byte CacheErrorCount = 0;
+        private byte UpdatesErrorCount = 0;
 
+        ////////////////////////////////////////////////////////////////////////
         // Start of cache cleaning
         // Find all cache directories and clean it
         public string CacheCleaning(bool ConfirmClean)
@@ -52,15 +55,14 @@ namespace _1C_Cache_Cleaning
                 }
             }
 
-            // Final message about cleaning status
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Очистка кэша 1С завершена.\n\n");
-            sb.Append("Очищено ");
             string CacheSizeConverted = ConvertSize(CacheSize);
-            sb.Append(CacheSizeConverted);
-
             if (ConfirmClean)
             {
+                // Final message about cleaning status
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Очистка кэша 1С завершена.\n\n");
+                sb.Append("Очищено ");                
+                sb.Append(CacheSizeConverted);
                 MessageBox.Show(sb.ToString(), "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
@@ -104,11 +106,11 @@ namespace _1C_Cache_Cleaning
                     catch
                     {
                         //MessageBox.Show(ex.ToString());
-                        if (ErrorCount != 0) { 
+                        if (CacheErrorCount != 0) { 
                             MessageBox.Show("Не все папки с кэшем особождены от процессов 1С.\n\nПопробуйте:\n• запустить очистку в агрессивном режиме\n• завершить все процессы 1С через диспетчер задач\n• запустить очистку после перезагрузки ПК.\n\nПроизойдёт очситка только незанятых папок", "Очистка не будет полной", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         }
 
-                        ErrorCount++;
+                        CacheErrorCount++;
 
                         // Break
                         return;
@@ -117,7 +119,8 @@ namespace _1C_Cache_Cleaning
             }
         }
 
-        // Start of temp deleting
+        ////////////////////////////////////////////////////////////////////////
+        // Cleaning DB temp files
         public void StartTempCleaning (string SelectedDBPath, string SelectedDBName)
         {
             TempSize = 0;
@@ -175,6 +178,81 @@ namespace _1C_Cache_Cleaning
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////
+        // Cleaning Updates
+        public string UpdatesCleaning (bool ConfirmClean)
+        {
+            UpdatesSize = 0;
+
+            string[] UpdateFolders = {
+                // Config + pathes folder
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\1C\1Cv8ConfigUpdate\",
+                // Platforms folder
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\1C\1Cv8PlatformUpdate",
+                // Templates folder
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\1C\1cv8\tmplts\1c\"
+            };
+  
+            foreach (string CurrentUpPath in UpdateFolders)
+            {
+                if (Directory.Exists(CurrentUpPath.Replace(@"\\", @"\")))
+                {
+                    // Get all subfolders of Updates folder
+                    string[] LocalSubDirs = Directory.GetDirectories(CurrentUpPath, "*", SearchOption.TopDirectoryOnly);
+
+                    // Foreach all subfolders
+                    foreach (string UpdatePath in LocalSubDirs)
+                    {
+                        try
+                        {
+                            double TempUpdatesSize = 0L;
+
+                            string[] AllUpdatesFiles = Directory.GetFiles(UpdatePath, "*.*", SearchOption.AllDirectories);
+
+                            foreach (string FileName in AllUpdatesFiles)
+                            {
+                                File.SetAttributes(FileName, FileAttributes.Normal);
+                                FileInfo Info = new FileInfo(FileName);
+                                TempUpdatesSize += Info.Length;
+                            }
+
+                            if (ConfirmClean)
+                            {
+                                Directory.Delete(UpdatePath, true);
+                            }
+
+                            // in a case of error, current cache size will be deleted
+                            UpdatesSize += TempUpdatesSize;
+                        }
+                        catch
+                        {
+                            if (UpdatesErrorCount != 0)
+                            {
+                                MessageBox.Show("Не удалось очистить все обновления\n\nПовторите попытку через некоторое время", "Очистка обновлений не выполнена", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            return ConvertSize(UpdatesSize);
+                        }
+                    }
+                }
+            }
+
+            string UpdatesSizeConverted = ConvertSize(UpdatesSize);
+
+            if (ConfirmClean)
+            {
+                // Final message about cleaning status
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Очистка обновлений 1С завершена.\n\n");
+                sb.Append("Очищено ");
+                
+                sb.Append(UpdatesSizeConverted);
+                MessageBox.Show(sb.ToString(), "Завершено", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            return UpdatesSizeConverted;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
         // Convert cache size 
         private string ConvertSize(double CurrentSize)
         {
